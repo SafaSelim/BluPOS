@@ -1,1 +1,14 @@
-<p>sales works!</p>
+<div class="row">
+  <div class="col-xs-10">
+    <app-sales-edit></app-sales-edit>
+    <hr>
+    <ul class="list-group">
+      <a class="list-group-item"
+      style="cursor: pointer"
+      *ngFor="let sale of sales"
+    >
+      {{sale.productId}} ({{sale.price}})X({{sale.quantity}}) => {{sale.subTotal}}
+    </a>
+    </ul>
+  </div>
+</div>

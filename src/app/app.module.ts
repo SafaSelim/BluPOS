@@ -15,6 +15,7 @@ import { SalesComponent } from './main/sales/sales.component';
 import { InvoicesComponent } from './main/invoices/invoices.component';
 import { CustomersComponent } from './main/customers/customers.component';
 import { CustomerDetailComponent } from './main/customers/customer-detail/customer-detail.component';
+import { SalesEditComponent } from './main/sales/sales-edit/sales-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CustomerDetailComponent } from './main/customers/customer-detail/custom
     InvoicesComponent,
     CustomersComponent,
     CustomerDetailComponent,
+    SalesEditComponent,
   ],
   imports: [
     BrowserModule,
