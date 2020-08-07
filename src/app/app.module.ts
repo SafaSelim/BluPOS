@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './main/dashboard/dashboard.component';
@@ -17,6 +19,8 @@ import { CustomersComponent } from './main/customers/customers.component';
 import { CustomerDetailComponent } from './main/customers/customer-detail/customer-detail.component';
 import { SalesEditComponent } from './main/sales/sales-edit/sales-edit.component';
 
+import { DropdownDirective } from './main/shared/dropdown.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,11 +35,13 @@ import { SalesEditComponent } from './main/sales/sales-edit/sales-edit.component
     CustomersComponent,
     CustomerDetailComponent,
     SalesEditComponent,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

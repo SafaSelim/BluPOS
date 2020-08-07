@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Sales} from './sales.model';
+import { Product } from '../products/product.model';
 
 @Component({
   selector: 'app-sales',
@@ -21,7 +22,7 @@ export class SalesComponent implements OnInit {
   new Sales({
     sales_id: 1,
     user_id: 2,
-    invoice_id: 3,
+    invoiceId: 3,
     product_id: 4,
     quantity: 5,
     price: 3.10,
@@ -40,6 +41,10 @@ export class SalesComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onProductAdded(product: Sales){
+    this.sales.push(product);
   }
 
 }

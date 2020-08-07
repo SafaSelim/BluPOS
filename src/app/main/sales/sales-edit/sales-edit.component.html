@@ -3,21 +3,33 @@
     <form>
       <div class="row">
         <div class="col-sm-5 form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" class="form-control">
+          <label for="prodId">Product Id</label>
+          <input
+            type="text"
+            id="prodId"
+            class="form-control"
+            #prodIdInput>
         </div>
         <div class="col-sm-2 form-group">
           <label for="quantity">Quantity</label>
-          <input type="text" id="quantity" class="form-control">
+          <input
+            type="text"
+            id="quantity"
+            class="form-control"
+            #quantityInput>
         </div>
         <div class="col-sm-2 form-group">
           <label for="price">Price</label>
-          <input type="text" id="price" class="form-control">
+          <input
+            type="text"
+            id="price"
+            class="form-control"
+            #priceInput>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <button class="btn btn-success" type="submit">Add</button>
+          <button class="btn btn-success" type="submit" (click)="onAddItem()">Add</button>
           <button class="btn btn-danger" type="button">Delete</button>
           <button class="btn btn-warning" type="button">Clear</button>
         </div>
