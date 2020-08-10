@@ -21,6 +21,8 @@ import { SalesEditComponent } from './main/sales/sales-edit/sales-edit.component
 
 import { DropdownDirective } from './main/shared/dropdown.directive';
 
+import { SalesService } from './main/sales/sales.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +45,7 @@ import { DropdownDirective } from './main/shared/dropdown.directive';
     NoopAnimationsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [SalesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

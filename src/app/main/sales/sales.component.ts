@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Sales} from './sales.model';
-import { Product } from '../products/product.model';
+import { Sales } from './sales.model';
+import { SalesService } from './sales.service';
 
 @Component({
   selector: 'app-sales',
@@ -9,42 +9,17 @@ import { Product } from '../products/product.model';
   styleUrls: ['./sales.component.scss']
 })
 export class SalesComponent implements OnInit {
-  sales: Sales[] = [
-  new Sales({
-    sales_id: 1,
-    user_id: 2,
-    invoice_id: 3,
-    product_id: 4,
-    quantity: 5,
-    price: 3.10,
-    sub_total: 15.50,
-  }),
-  new Sales({
-    sales_id: 1,
-    user_id: 2,
-    invoiceId: 3,
-    product_id: 4,
-    quantity: 5,
-    price: 3.10,
-    sub_total: 15.50,
-  }),
-  new Sales({
-    sales_id: 1,
-    user_id: 2,
-    invoice_id: 3,
-    product_id: 4,
-    quantity: 5,
-    price: 3.10,
-    sub_total: 15.50,
-  })];
+  sales: Sales[];
 
-  constructor() { }
+  constructor(private salesService: SalesService) { }
 
   ngOnInit(): void {
-  }
-
-  onProductAdded(product: Sales){
-    this.sales.push(product);
+    this.sales = this.salesService.getSales();
+    this.salesService.salesChanged.subscribe(
+      (sales: Sales[]) => {
+          this.sales = sales;
+      }
+    )
   }
 
 }

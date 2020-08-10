@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
-import { Product } from '../../products/product.model';
 import { Sales } from '../sales.model';
+import { SalesService } from '../sales.service';
 
 @Component({
   selector: 'app-sales-edit',
@@ -11,9 +11,9 @@ export class SalesEditComponent implements OnInit {
   @ViewChild('prodIdInput', { static: false }) prodIdInputRef: ElementRef;
   @ViewChild('quantityInput', { static: false }) quantityInputRef: ElementRef;
   @ViewChild('priceInput', { static: false }) priceInputRef: ElementRef;
-  @Output() productAdded = new EventEmitter<Sales>();
 
-  constructor() { }
+
+  constructor(private salesService: SalesService) { }
 
   ngOnInit(): void {
   }
@@ -28,8 +28,7 @@ export class SalesEditComponent implements OnInit {
       price: prodPrice,
       sub_total: (prodQty*prodPrice),
     });
-
-    this.productAdded.emit(newProduct);
+    this.salesService.addSales(newProduct);
 
   }
 
