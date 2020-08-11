@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../products.model';
-import { ProductsService } from '../../products.service';
 
 @Component({
   selector: 'app-product-item',
@@ -9,13 +8,9 @@ import { ProductsService } from '../../products.service';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product: Product;
-  constructor(private productsService: ProductsService) { }
+  @Input() index: number;
 
   ngOnInit(): void {
-  }
-
-  onSelected() {
-      this.productsService.productSelected.emit(this.product);
   }
 
 }

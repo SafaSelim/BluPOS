@@ -22,6 +22,8 @@ import { SalesEditComponent } from './main/sales/sales-edit/sales-edit.component
 import { DropdownDirective } from './main/shared/dropdown.directive';
 
 import { SalesService } from './main/sales/sales.service';
+import { ProductStartComponent } from './main/products/product-start/product-start.component';
+import { ProductEditComponent } from './main/products/product-edit/product-edit.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { SalesService } from './main/sales/sales.service';
     CustomerDetailComponent,
     SalesEditComponent,
     DropdownDirective,
+    ProductStartComponent,
+    ProductEditComponent,
   ],
   imports: [
     BrowserModule,

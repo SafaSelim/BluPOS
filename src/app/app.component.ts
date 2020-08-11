@@ -7,9 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'blupos';
-  loadedFeature = 'dashboard';
 
-  onNavigated(feature: string) {
-    this.loadedFeature = feature;
-  }
 }

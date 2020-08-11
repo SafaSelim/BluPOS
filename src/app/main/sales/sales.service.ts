@@ -1,10 +1,11 @@
-import { EventEmitter } from '@angular/core';
+// import { EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 
 import { Sales } from './sales.model';
 import { Product } from '../products/products.model';
 
 export class SalesService {
-  salesChanged = new EventEmitter<Sales[]>();
+  salesChanged = new Subject<Sales[]>();
 
   private sales: Sales[] = [
     new Sales({
@@ -41,7 +42,7 @@ export class SalesService {
 
     addSales(sale: Sales) {
       this.sales.push(sale);
-      this.salesChanged.emit(this.sales.slice());
+      this.salesChanged.next(this.sales.slice());
     }
 
     addProducts(product: Product) {
@@ -55,7 +56,7 @@ export class SalesService {
         subTotal: 15.50,
       },]
        this.sales.push(...sale);
-       this.salesChanged.emit(this.sales.slice());
+       this.salesChanged.next(this.sales.slice());
     }
 
 }

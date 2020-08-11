@@ -1,10 +1,9 @@
 import { Product } from './products.model';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { SalesService } from '../sales/sales.service';
 
 @Injectable()
 export class ProductsService {
-  productSelected = new EventEmitter<Product>();
 
   private products: Product[] = [new Product({
     product_id: 1,
@@ -39,6 +38,10 @@ export class ProductsService {
 
   getProducts() {
     return this.products.slice();
+  }
+
+  getProduct(index: number) {
+    return this.products[index];
   }
 
   addProductsToSales(product: Product) {
