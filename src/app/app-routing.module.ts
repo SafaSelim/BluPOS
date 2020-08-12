@@ -10,7 +10,7 @@ import { ProductDetailComponent } from './main/products/product-detail/product-d
 import { ProductEditComponent } from './main/products/product-edit/product-edit.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full'  },
+  { path: '', redirectTo: '/sales', pathMatch: 'full'  },
   { path: 'products', component: ProductsComponent, children: [
     { path: '', component: ProductStartComponent },
     { path: 'new', component: ProductEditComponent },

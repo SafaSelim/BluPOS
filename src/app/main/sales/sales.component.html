@@ -3,12 +3,16 @@
     <app-sales-edit></app-sales-edit>
     <hr>
     <ul class="list-group">
+      <h4>Sales</h4>
       <a class="list-group-item"
-      style="cursor: pointer"
-      *ngFor="let sale of sales"
+      style="cursor: pointer; margin:10px;"
+      *ngFor="let sale of sales; let i = index"
+      (click)="onEditProductItem(i)"
     >
+
       {{sale.productId}} ({{sale.price}})X({{sale.quantity}}) => {{sale.subTotal}}
     </a>
+      <button class="btn btn-primary" style="margin: 10px">Get Payment</button>
     </ul>
   </div>
 </div>

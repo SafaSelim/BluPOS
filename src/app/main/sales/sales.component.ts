@@ -27,4 +27,8 @@ export class SalesComponent implements OnInit, OnDestroy {
     this.salesChangeSub.unsubscribe();
   }
 
+  onEditProductItem(index: number) {
+    this.salesService.startedEditing.next(index);
+  }
+
 }

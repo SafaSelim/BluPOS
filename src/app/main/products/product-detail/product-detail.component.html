@@ -22,18 +22,23 @@
       <ul class="dropdown-menu">
         <li><a (click)="onAddToSales()" style="cursor: pointer;">Add To Sales</a></li>
         <li><a style="cursor: pointer;" (click)="onEditProduct()">Edit Product</a></li>
-        <li><a style="cursor: pointer;">Delete Product</a></li>
+        <li><a style="cursor: pointer;" (click)="onDelete()">Delete Product</a></li>
       </ul>
     </div>
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    {{ product.price }}
+    Product Code: {{ product.productCode }}
   </div>
 </div>
 <div class="row">
   <div class="col-xs-12">
-    {{ product.stock }}
+    Price: {{ product.price }}
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    Unit in Stock: {{ product.unitInStock }}
   </div>
 </div>

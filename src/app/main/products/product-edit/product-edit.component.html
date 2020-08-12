@@ -1,1 +1,69 @@
-<p>product-edit works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" [disabled]="!productForm.valid">Save</button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="prodName">Product Name</label>
+            <input type="text" formControlName="prodName" id="prodName" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="imgPath">Image URL</label>
+            <input #imgPath type="text" formControlName="imgPath" id="imgPath" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <img [src]="imgPath.value" class="img-responsive" alt="" style="max-height: 100px;"/>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="prodCatId">Product Code</label>
+            <input type="text" formControlName="prodCode" id="prodCode" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="prodCatId">Product Category</label>
+            <input type="text" formControlName="prodCatId" id="prodCatId" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-xs-7">
+          <label for="price">Price</label>
+          <input type="text" formControlName="price" id="price" class="form-control" />
+        </div>
+        <div class="form-group col-xs-5">
+          <label for="uom">Unit Of Measure</label>
+          <input type="text" formControlName="uom" id="uom" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="unitInStock">Unit in Stock</label>
+            <input type="text" formControlName="unitInStock" id="unitInStock" class="form-control" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

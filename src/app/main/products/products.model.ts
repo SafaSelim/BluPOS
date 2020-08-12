@@ -3,7 +3,7 @@ export class Product {
   productName: string;
   productCode: string;
   productCatId: number;
-  stock: number;
+  unitInStock: number;
   uom: number;
   price: number;
   imgPath: string;
@@ -14,7 +14,7 @@ export class Product {
     this.productName = product.product_name || "";
     this.productCode = product.product_code || "";
     this.productCatId = product.product_cat_id || null;
-    this.stock = product.stock || null;
+    this.unitInStock = product.unit_in_stock || null;
     this.uom = product.uom || null;
     this.price = product.price || null;
     this.imgPath = product.img_path || null;

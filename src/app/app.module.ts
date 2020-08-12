@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +25,7 @@ import { DropdownDirective } from './main/shared/dropdown.directive';
 import { SalesService } from './main/sales/sales.service';
 import { ProductStartComponent } from './main/products/product-start/product-start.component';
 import { ProductEditComponent } from './main/products/product-edit/product-edit.component';
+import { ProductsService } from './main/products/products.service';
 
 @NgModule({
   declarations: [
@@ -48,8 +50,10 @@ import { ProductEditComponent } from './main/products/product-edit/product-edit.
     AppRoutingModule,
     NoopAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [SalesService],
+  providers: [SalesService, ProductsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

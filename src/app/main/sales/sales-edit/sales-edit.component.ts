@@ -1,35 +1,68 @@
-import { Component, OnInit, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Sales } from '../sales.model';
 import { SalesService } from '../sales.service';
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sales-edit',
   templateUrl: './sales-edit.component.html',
   styleUrls: ['./sales-edit.component.scss']
 })
-export class SalesEditComponent implements OnInit {
-  @ViewChild('prodIdInput', { static: false }) prodIdInputRef: ElementRef;
-  @ViewChild('quantityInput', { static: false }) quantityInputRef: ElementRef;
-  @ViewChild('priceInput', { static: false }) priceInputRef: ElementRef;
-
+export class SalesEditComponent implements OnInit, OnDestroy {
+  @ViewChild('f', { static: false }) salesForm: NgForm;
+  subscription: Subscription;
+  editMode: boolean = false;
+  editedItemIndex: number;
+  editedItem: Sales;
 
   constructor(private salesService: SalesService) { }
 
   ngOnInit(): void {
+    this.subscription = this.salesService.startedEditing.subscribe(
+      (index: number) => {
+        this.editedItemIndex = index;
+        this.editMode = true;
+        this.editedItem = this.salesService.getSale(index);
+        this.salesForm.setValue({
+          prodId: this.editedItem.productId,
+          quantity: this.editedItem.quantity,
+          price: this.editedItem.price
+        })
+
+      }
+    );
   }
 
-  onAddItem() {
-    const prodId = this.prodIdInputRef.nativeElement.value;
-    const prodQty = this.quantityInputRef.nativeElement.value;
-    const prodPrice = this.priceInputRef.nativeElement.value;
-    const newProduct = new Sales({
-      product_id: prodId,
-      quantity: prodQty,
-      price: prodPrice,
-      sub_total: (prodQty*prodPrice),
+  onSubmit(form: NgForm) {
+    const value = form.value;
+    const newSale = new Sales({
+      product_id: value.prodId,
+      quantity: value.quantity,
+      price: value.price,
+      sub_total: (value.quantity * value.price),
     });
-    this.salesService.addSales(newProduct);
+    if (this.editMode) {
+      this.salesService.updateSale(this.editedItemIndex, newSale)
+    } else {
+      this.salesService.addSales(newSale);
+    }
+    this.editMode = false;
+    form.reset();
+  }
 
+  onClear() {
+    this.salesForm.reset();
+    this.editMode = false;
+  }
+
+  onDelete() {
+    this.salesService.deleteSale(this.editedItemIndex);
+    this.onClear();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }
