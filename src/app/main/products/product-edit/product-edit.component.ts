@@ -33,12 +33,12 @@ export class ProductEditComponent implements OnInit {
   onSubmit() {
     console.log(this.productForm);
     const newProduct = new Product({
-      'product_id': 0,
-      'product_name' : this.productForm.value['prodName'],
-      'img_path' : this.productForm.value['imgPath'],
-      'product_code' : this.productForm.value['prodCode'],
-      'product_cat_id' : this.productForm.value['prodCatId'],
-      'unit_in_stock' : this.productForm.value['unitInStock'],
+      'prodId': 0,
+      'prodName' : this.productForm.value['prodName'],
+      'imgPath' : this.productForm.value['imgPath'],
+      'prodCode' : this.productForm.value['prodCode'],
+      'prodCatId' : this.productForm.value['prodCatId'],
+      'unitInStock' : this.productForm.value['unitInStock'],
       'uom' : this.productForm.value['uom'],
       'price' : this.productForm.value['price'],
     });
@@ -49,7 +49,7 @@ export class ProductEditComponent implements OnInit {
       this.productsService.addProduct(newProduct);
     }
 
-    this.onCancel();  
+    this.onCancel();
   }
 
   private initForm() {

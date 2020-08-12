@@ -8,7 +8,7 @@ export class SalesService {
   salesChanged = new Subject<Sales[]>();
   startedEditing = new Subject<number>();
 
-  private sales: Sales[] = [
+  private sales: Sales[] = [/*
     new Sales({
       sales_id: 1,
       user_id: 2,
@@ -35,7 +35,7 @@ export class SalesService {
       quantity: 1,
       price: 32.10,
       sub_total: 32.10,
-    })];
+    }) */];
 
   getSales() {
     return this.sales.slice();

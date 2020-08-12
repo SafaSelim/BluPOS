@@ -42,6 +42,7 @@ export class SalesEditComponent implements OnInit, OnDestroy {
       price: value.price,
       sub_total: (value.quantity * value.price),
     });
+    debugger;
     if (this.editMode) {
       this.salesService.updateSale(this.editedItemIndex, newSale)
     } else {

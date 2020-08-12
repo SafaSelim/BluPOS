@@ -10,13 +10,13 @@ export class Product {
 
   constructor(product) {
     console.log("ProductModel:constructor-->", product);
-    this.productId = product.product_id;
-    this.productName = product.product_name || "";
-    this.productCode = product.product_code || "";
-    this.productCatId = product.product_cat_id || null;
-    this.unitInStock = product.unit_in_stock || null;
+    this.productId = product.prodId;
+    this.productName = product.prodName || "";
+    this.productCode = product.prodCode || "";
+    this.productCatId = product.prodCatId || null;
+    this.unitInStock = product.unitInStock || null;
     this.uom = product.uom || null;
     this.price = product.price || null;
-    this.imgPath = product.img_path || null;
+    this.imgPath = product.imgPath || "";
   }
 }
