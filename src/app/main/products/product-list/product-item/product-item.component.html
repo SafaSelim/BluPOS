@@ -2,15 +2,16 @@
   [routerLink]="[index]"
   routerLinkActive="active"
   style="cursor: pointer;"
-  class="list-group-item clearfix">
- <!--  <div class="pull-left">
+  class="list-group-item clearfix"
+>
+   <div class="pull-left">
     <h4 class="list-group-item-heading">
     {{ product.productName }}
-    </h4> -->
-<!--     <p class="list-group-item-text">Product Code: {{ product.productCode }}</p>
-    <h4 class="list-group-item-heading">Price: {{ product.price }}</h4>
-    <p class="list-group-item-text">Stock: {{ product.stock }}</p> -->
-  <!-- </div>
+    </h4>
+      <p class="list-group-item-text">Product Code: {{ product.productCode }}</p>
+    <h4 class="list-group-item-heading">Price: {{ product.price | currency }}</h4>
+    <p class="list-group-item-text">Stock: {{ product.unitInStock }}</p>
+  </div>
   <span class="pull-right">
     <img
       [src]="product.imgPath"
@@ -18,17 +19,6 @@
       class="img-responsive"
       style="max-height: 50px;"
     />
-  </span> -->
+  </span>
 
-  <div class="card" style="width: 18rem;">
-    <img
-    [src]="product.imgPath"
-    alt="{{ product.productName }}"
-    class="img-responsive card-img-top"
-    style="max-height: 50px;"
-  />
-    <div class="card-body">
-      <h5 class="card-title"> {{ product.productName }}</h5>
-    </div>
-  </div>
 </a>

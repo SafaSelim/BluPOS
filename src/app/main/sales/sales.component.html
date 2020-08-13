@@ -1,21 +1,67 @@
-<div class="row">
-  <div class="col-xs-10">
-    <app-sales-edit></app-sales-edit>
-    <hr>
-    <ul class="list-group">
-      <h4>Sales</h4>
-      <a class="list-group-item"
-      style="cursor: pointer; margin:10px;"
-      *ngFor="let sale of sales; let i = index"
-      (click)="onEditProductItem(i)"
-    >
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-6">
+      <app-sales-edit></app-sales-edit>
+      <hr />
+      <ul class="list-group">
+        <h3>Sale List</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Qty</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="cursor:pointer;"
+              *ngFor="let sale of sales; let i = index"
+              (click)="onEditProductItem(i)"
+            >
+              <th scope="row">{{i + 1}}</th>
+              <td>
+                {{ sale.productId | getname: products:"productId":"productName" }}
+              </td>
+              <td>{{ sale.price | currency }}</td>
+              <td>{{ sale.quantity }}</td>
+              <td>{{ sale.quantity * sale.price | currency }}</td>
+            </tr>
+          </tbody>
+        </table>
 
-      {{sale.productId | getname:products:'productId':'productName'}}
-        Price: {{sale.price | currency}}
-        Quantity: {{sale.quantity}}
-        Subtotal: {{sale.price * sale.quantity | currency}}
-    </a>
-      <button class="btn btn-primary" style="margin: 10px">Get Payment</button>
-    </ul>
+        <button class="btn btn-primary" style="margin: 10px;">Get Payment</button>
+      </ul>
+    </div>
+<!--     <div class="col-xs-6">
+      <h3>Products</h3>
+      <div class="row">
+        <div
+          class="col-xs-4"
+          style="margin-bottom: 20px;"
+          *ngFor="let productEl of products; let i = index"
+        >
+          <div class="card" style="width: 20rem;">
+            <img
+              [src]="productEl.imgPath"
+              alt="{{ productEl.productName }}"
+              class="img-responsive card-img-top"
+              style="max-height: 50px;"
+            />
+            <div class="card-block">
+              <h4 class="card-title">{{ productEl.productName }}</h4>
+              <p class="card-text">Price: {{ productEl.price }}</p>
+              <button class="add-to-cart btn btn-success">
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
   </div>
+
 </div>
+
+<!-- <i class="material-icons">settings</i> -->

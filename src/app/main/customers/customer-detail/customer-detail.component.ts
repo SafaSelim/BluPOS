@@ -12,9 +12,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./customer-detail.component.scss']
 })
 export class CustomerDetailComponent implements OnInit {
+  customer: Customer;
   id: number;
-  editMode: boolean = false;
-  customerForm: FormGroup;
 
   constructor(
     private customersService: CustomersService,
@@ -26,43 +25,23 @@ export class CustomerDetailComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
         this.id = +params['id'];
-        this.editMode = params['id'] != null;
-        this.initForm();
-        console.log(this.editMode);
-      });
-  }
-
-  onSubmit() {
-    console.log(this.customerForm);
-    const newCustomer = new Customer(this.customerForm.value);
-    console.log("newCustomer",newCustomer);
-    if (this.editMode) {
-      this.customersService.updCustomer(this.id, newCustomer);
-    }else {
-      this.customersService.addCustomer(newCustomer);
-    }
-
-    this.onCancel();
+        this.customer = this.customersService.getCustomer(this.id);
+      }
+    )
   }
 
 
-  private initForm() {
-    let customer: Customer = null;
-    if (this.editMode) {
-      customer = this.customersService.getCustomer(this.id);
-
-    }
-
-    this.customerForm = new FormGroup({
-      'firtName': new FormControl(customer.firstName, Validators.required),
-      'lastName': new FormControl(customer.lastName, Validators.required),
-      'contact': new FormControl(customer.contact, Validators.required),
-      'address': new FormControl(customer.address, Validators.required),
-    });
+  onEditCustomer() {
+    this.router.navigate(['edit'], { relativeTo: this.route });
+    // this.router.navigate(['../', this.id, 'edit'], { relativeTo: this.route });
   }
 
-  onCancel(){
-    this.router.navigate(['../'], {relativeTo: this.route});
+  onDeleteCustomer() {
+    this.customersService.deleteProduct(this.id);
+    this.router.navigate(['/customers']);
   }
+
+
+
 
 }

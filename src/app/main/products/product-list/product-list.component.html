@@ -1,14 +1,30 @@
-<div class="row">
-  <div class="col-xs-12">
-    <button class="btn btn-success" (click)="onNewProduct()">
-      New Product
-    </button>
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-success" (click)="onNewProduct()">
+        New Product
+      </button>
+    </div>
   </div>
-</div>
-<hr />
-<h3>Products</h3>
-<div class="row">
-  <div class="col-xs-3" style="margin-bottom: 20px;" *ngFor="let productEl of products; let i = index">
-    <app-product-item [product]="productEl" [index]="i"></app-product-item>
+  <h3>Products</h3>
+  <div class="row">
+    <div
+      class="col-xs-4"
+      style="margin-bottom: 20px;"
+      *ngFor="let productEl of products; let i = index"
+    >
+      <app-product-item [product]="productEl" [index]="i"></app-product-item>
+    </div>
   </div>
+  <!-- <div class="row">
+    <div
+      class="col-xs-3"
+      style="margin-bottom: 20px;"
+      *ngFor="let productEl of products; let i = index"
+    >
+
+    </div>
+  </div> -->
 </div>
+

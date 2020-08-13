@@ -9,7 +9,7 @@ export class GetNamePipe implements PipeTransform {
     array = array.filter(el => {
       return el[keyExpr] == value;
     });
-    name = array[0][displayExpr];
+    name = array[0][displayExpr] || "";
     return name;
   }
 }

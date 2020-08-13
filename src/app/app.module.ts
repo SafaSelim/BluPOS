@@ -6,48 +6,27 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './main/dashboard/dashboard.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ProductsComponent } from './main/products/products.component';
+
+import { SharedModule } from './main/shared/shared.module';
+import { ProductsModule } from './main/products/products.module';
+import { CustomersModule } from './main/customers/customers.module';
+import { SalesModule } from './main/sales/sales.module';
 
 import { HeaderComponent } from './header/header.component';
-import { ProductListComponent } from './main/products/product-list/product-list.component';
-import { ProductDetailComponent } from './main/products/product-detail/product-detail.component';
-import { ProductItemComponent } from './main/products/product-list/product-item/product-item.component';
-import { SalesComponent } from './main/sales/sales.component';
+import { DashboardComponent } from './main/dashboard/dashboard.component';
 import { InvoicesComponent } from './main/invoices/invoices.component';
-import { CustomersComponent } from './main/customers/customers.component';
-import { CustomerDetailComponent } from './main/customers/customer-detail/customer-detail.component';
-import { SalesEditComponent } from './main/sales/sales-edit/sales-edit.component';
-
-import { DropdownDirective } from './main/shared/dropdown.directive';
 
 import { SalesService } from './main/sales/sales.service';
-import { ProductStartComponent } from './main/products/product-start/product-start.component';
-import { ProductEditComponent } from './main/products/product-edit/product-edit.component';
 import { ProductsService } from './main/products/products.service';
-
-import { GetNamePipe } from './main/shared/getname.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    ProductsComponent,
-    HeaderComponent,
-    ProductListComponent,
-    ProductDetailComponent,
-    ProductItemComponent,
-    SalesComponent,
-    InvoicesComponent,
-    CustomersComponent,
-    CustomerDetailComponent,
-    SalesEditComponent,
-    DropdownDirective,
-    ProductStartComponent,
-    ProductEditComponent,
 
-    GetNamePipe,
+    DashboardComponent,
+    HeaderComponent,
+    InvoicesComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +35,12 @@ import { GetNamePipe } from './main/shared/getname.pipe';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+
+    ProductsModule,
+    CustomersModule,
+    SalesModule,
+
+    SharedModule,
   ],
   providers: [SalesService, ProductsService],
   bootstrap: [AppComponent]
