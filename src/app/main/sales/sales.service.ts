@@ -66,11 +66,12 @@ export class SalesService {
       userId: 2,
       invoiceId: 3,
       productId: product.productId,
-      quantity: 5,
+      quantity: 1,
       price: product.price,
-      subTotal: 15.50,
+      subTotal: product.price * 1,
     },]
     this.sales.push(...sale);
+    console.log('sales--->', this.sales);
     this.salesChanged.next(this.sales.slice());
   }
 

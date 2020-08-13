@@ -10,7 +10,10 @@
       (click)="onEditProductItem(i)"
     >
 
-      {{sale.productId}} ({{sale.price}})X({{sale.quantity}}) => {{sale.subTotal}}
+      {{sale.productId | getname:products:'productId':'productName'}}
+        Price: {{sale.price | currency}}
+        Quantity: {{sale.quantity}}
+        Subtotal: {{sale.price * sale.quantity | currency}}
     </a>
       <button class="btn btn-primary" style="margin: 10px">Get Payment</button>
     </ul>

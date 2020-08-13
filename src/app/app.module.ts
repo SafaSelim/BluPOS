@@ -27,6 +27,8 @@ import { ProductStartComponent } from './main/products/product-start/product-sta
 import { ProductEditComponent } from './main/products/product-edit/product-edit.component';
 import { ProductsService } from './main/products/products.service';
 
+import { GetNamePipe } from './main/shared/getname.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,8 @@ import { ProductsService } from './main/products/products.service';
     DropdownDirective,
     ProductStartComponent,
     ProductEditComponent,
+
+    GetNamePipe,
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,44 @@
-<p>customer-detail works!</p>
+<div class="row">
+  <div class="col-xs-12">
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-xs-12">
+          <button class="btn btn-success" type="submit" [disabled]="!customerForm.valid">Save</button>
+          <button class="btn btn-danger" type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="firtName">First Name</label>
+            <input type="text" formControlName="firtName" id="firtName" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" formControlName="lastName" id="lastName" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="contact">Contact</label>
+            <input type="text" formControlName="contact" id="contact" class="form-control" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="textarea" formControlName="address" id="address" class="form-control" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

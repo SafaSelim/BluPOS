@@ -3,6 +3,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Sales } from './sales.model';
 import { SalesService } from './sales.service';
 import { Subscription } from 'rxjs';
+import { Product } from '../products/products.model';
+import { ProductsService } from '../products/products.service';
 
 @Component({
   selector: 'app-sales',
@@ -12,7 +14,14 @@ import { Subscription } from 'rxjs';
 export class SalesComponent implements OnInit, OnDestroy {
   sales: Sales[];
   salesChangeSub: Subscription;
-  constructor(private salesService: SalesService) { }
+  products: Product[] = [];
+
+  constructor(
+    private salesService: SalesService,
+    private productsService: ProductsService,
+    ) {
+      this.products = this.productsService.getProducts();
+     }
 
   ngOnInit(): void {
     this.sales = this.salesService.getSales();
