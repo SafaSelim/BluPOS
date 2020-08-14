@@ -13,6 +13,7 @@ import { SharedModule } from './main/shared/shared.module';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './main/dashboard/dashboard.component';
 import { InvoicesComponent } from './main/invoices/invoices.component';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { InvoicesComponent } from './main/invoices/invoices.component';
     DashboardComponent,
     HeaderComponent,
     InvoicesComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
