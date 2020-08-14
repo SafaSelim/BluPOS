@@ -5,9 +5,7 @@ import { apiURL } from '../../config/config';
 
 import { Customer } from './customers.model'
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class CustomersService {
   customersChanged = new Subject<Customer[]>();
 

@@ -5,7 +5,7 @@ import { SalesComponent } from './sales.component';
 
 
 const routes: Routes = [
-  { path: 'sales', component: SalesComponent },];
+  { path: '', component: SalesComponent },];
 
 
 @NgModule({

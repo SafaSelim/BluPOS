@@ -9,7 +9,9 @@ import { ProductStartComponent } from './product-start/product-start.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 
 const routes: Routes = [{
-  path: 'products', component: ProductsComponent, children: [
+  path: '',
+  component: ProductsComponent,
+  children: [
     { path: '', component: ProductStartComponent },
     { path: 'new', component: ProductEditComponent },
     { path: ':id', component: ProductDetailComponent },

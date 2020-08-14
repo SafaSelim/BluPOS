@@ -1,9 +1,11 @@
 // import { EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 import { Sales } from './sales.model';
 import { Product } from '../products/products.model';
 
+@Injectable({providedIn: 'root'})
 export class SalesService {
   salesChanged = new Subject<Sales[]>();
   startedEditing = new Subject<number>();
