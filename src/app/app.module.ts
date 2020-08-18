@@ -8,12 +8,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SharedModule } from './main/shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './main/dashboard/dashboard.component';
-import { InvoicesComponent } from './main/invoices/invoices.component';
 import { AuthComponent } from './auth/auth.component';
+
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +22,9 @@ import { AuthComponent } from './auth/auth.component';
 
     DashboardComponent,
     HeaderComponent,
-    InvoicesComponent,
     AuthComponent,
+
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

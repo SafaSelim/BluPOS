@@ -17,12 +17,12 @@ export class ProductsService {
     ) { }
 
   getProducts() {
-    this.http.get(apiURL + 'api/listProduct').subscribe(
+   /*  this.http.get(apiURL + 'api/listProduct').subscribe(
       (products: Product[]) => {
         console.log(products);
         this.setProducts(products);
       }
-    )
+    ) */
     return this.products.slice();
   }
 
@@ -47,11 +47,11 @@ export class ProductsService {
   addProduct(product: Product) {
     this.products.push(product);
     const body = this.products;
-    this.http.post(apiURL + 'api/addProduct', body).subscribe(
+    /* this.http.post(apiURL + 'api/addProduct', body).subscribe(
         response => {
           console.log('ProductsService:addProduct-->',response);
         }
-    );
+    ); */
     this.productsChanged.next(this.products.slice());
   }
 

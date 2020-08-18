@@ -4,13 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { CustomersComponent } from './customers.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
+import { CustomerStartComponent } from './customer-start/customer-start.component';
 
 
 const routes: Routes = [ {
   path: '',
     component: CustomersComponent,
     children: [
-    { path: '', component: CustomersComponent },
+    { path: '', component: CustomerStartComponent },
     { path: 'new', component: CustomerEditComponent },
     { path: ':id', component: CustomerDetailComponent },
     { path: ':id/edit', component: CustomerEditComponent },

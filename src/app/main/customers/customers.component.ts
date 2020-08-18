@@ -8,16 +8,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class CustomersComponent implements OnInit {
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
 
-  onAddCustomer() {
-    this.router.navigate(['new'], { relativeTo: this.route });
-  }
+
 }

@@ -15,7 +15,8 @@ export class CustomerListComponent implements OnInit {
 
   constructor(
     private customersService: CustomersService,
-    
+    private router: Router,
+    private route: ActivatedRoute,
   ) {
 
   }
@@ -31,6 +32,10 @@ export class CustomerListComponent implements OnInit {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  onAddCustomer() {
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 
 
