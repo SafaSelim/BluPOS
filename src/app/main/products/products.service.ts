@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { apiURL } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class ProductsService {
   productsChanged = new Subject<Product[]>();
 
@@ -14,10 +14,10 @@ export class ProductsService {
   constructor(
     private salesService: SalesService,
     private http: HttpClient,
-    ) { }
+  ) { }
 
   getProducts() {
-   /*  this.http.get(apiURL + 'api/listProduct').subscribe(
+    /* this.http.get("https://pos-system-ccbc8.firebaseio.com/products.json").subscribe(
       (products: Product[]) => {
         console.log(products);
         this.setProducts(products);
@@ -27,9 +27,9 @@ export class ProductsService {
   }
 
   setProducts(products: Product[]) {
-    console.log("setProducts--->",products)
+    console.log("setProducts--->", products)
     this.products = [];
-    for( let i = 0; i< products.length; i++ ){
+    for (let i = 0; i < products.length; i++) {
       this.products.push(new Product(products[i]));
     }
     this.productsChanged.next(this.products.slice());
@@ -46,13 +46,14 @@ export class ProductsService {
 
   addProduct(product: Product) {
     this.products.push(product);
-    const body = this.products;
-    /* this.http.post(apiURL + 'api/addProduct', body).subscribe(
-        response => {
-          console.log('ProductsService:addProduct-->',response);
-        }
-    ); */
     this.productsChanged.next(this.products.slice());
+    /*  const body = this.products;
+    console.log(body)
+    this.http.post("https://pos-system-ccbc8.firebaseio.com/products.json/products.json", body).subscribe(
+      response => {
+        console.log('ProductsService:addProduct-->',response);
+      }
+      ); */
   }
 
   updateProduct(index: number, newProduct: Product) {
@@ -61,7 +62,7 @@ export class ProductsService {
   }
 
   deleteProduct(index: number) {
-    this.products.splice(index,1);
+    this.products.splice(index, 1);
     this.productsChanged.next(this.products.slice());
   }
 

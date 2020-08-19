@@ -4,13 +4,13 @@
   style="cursor: pointer;"
   class="list-group-item clearfix"
 >
-   <div class="pull-left">
+     <div class="pull-left">
     <h4 class="list-group-item-heading">
     {{ product.productName }}
     </h4>
       <p class="list-group-item-text">Product Code: {{ product.productCode }}</p>
     <h4 class="list-group-item-heading">Price: {{ product.price | currency }}</h4>
-    <p class="list-group-item-text">Stock: {{ product.unitInStock }}</p>
+    <p [ngStyle]="{ color: product.unitInStock == 0 ? 'red' : 'green' }">{{ product.unitInStock > 0 ? "In Stock" : "Out of Stock" }}</p>
   </div>
   <span class="pull-right">
     <img

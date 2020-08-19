@@ -10,10 +10,10 @@ export class Product {
 
   constructor(product) {
     console.log("ProductModel:constructor-->", product);
-    this.productId = product.prodId;
-    this.productName = product.prodName || "";
-    this.productCode = product.prodCode || "";
-    this.productCatId = product.prodCatId || null;
+    this.productId = product.productId;
+    this.productName = product.productName || "";
+    this.productCode = product.productCode || "";
+    this.productCatId = product.productCatId || null;
     this.unitInStock = product.unitInStock || null;
     this.uom = product.uom || null;
     this.price = product.price || null;

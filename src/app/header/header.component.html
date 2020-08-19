@@ -19,17 +19,20 @@
         <li routerLinkActive="active">
           <a routerLink="/auth" *ngIf="!isAuthenticated">Authenticate</a>
         </li>
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="isAuthenticated">
+          <a routerLink="/sales">Sales</a>
+        </li>
+        <li routerLinkActive="active" *ngIf="isAuthenticated">
           <a routerLink="/products">Products</a>
         </li>
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="isAuthenticated">
           <a routerLink="/customers">Customers</a>
         </li>
-        <li routerLinkActive="active">
+        <li routerLinkActive="active" *ngIf="isAuthenticated">
           <a routerLink="/invoices">Invoices</a>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" *ngIf="isAuthenticated">
         <li class="dropdown" appDropdown>
           <a style="cursor: pointer;" class="dropdown-toggle" role="button"
             >Profile<!-- Profile Icon -->
@@ -37,7 +40,13 @@
           ></a>
           <ul class="dropdown-menu">
             <!-- <li><a style="cursor: pointer;">Profile</a></li> -->
-            <li><a style="cursor: pointer;">Logout</a></li>
+            <li>
+              <a style="cursor: pointer;" (click)="onSaveData()">Save Data</a>
+            </li>
+            <li>
+              <a style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a>
+            </li>
+            <li><a style="cursor: pointer;" (click)="onLogout()">Logout</a></li>
           </ul>
         </li>
       </ul>

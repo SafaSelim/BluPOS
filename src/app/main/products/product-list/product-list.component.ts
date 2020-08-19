@@ -27,6 +27,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       }
     )
     this.products = this.productsService.getProducts();
+    console.log("ProductListComponent",this.products);
   }
 
   ngOnDestroy() {

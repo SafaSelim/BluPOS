@@ -16,12 +16,12 @@ export class CustomersService {
   ) { }
 
   getCustomers() {
-    this.http.get(apiURL + 'api/listCust').subscribe(
+    /* this.http.get(apiURL + 'api/listCust').subscribe(
       (customers: Customer[]) => {
         console.log(customers);
         this.setCustomers(customers);
       }
-    )
+    ) */
     return this.customers.slice();
   }
 
@@ -41,11 +41,11 @@ export class CustomersService {
   addCustomer(customer: Customer) {
     this.customers.push(customer);
     const body = this.customers;
-    this.http.post(apiURL + 'api/addCust', body).subscribe(
+   /*  this.http.post(apiURL + 'api/addCust', body).subscribe(
         response => {
           console.log('CustomersService:addCustomer-->',response);
         }
-    );
+    ); */
     this.customersChanged.next(this.customers.slice());
   }
 
