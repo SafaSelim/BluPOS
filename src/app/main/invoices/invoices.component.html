@@ -1,1 +1,34 @@
-<p>invoices works!</p>
+<div class="row">
+  <h2>Invoices</h2>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Customer</th>
+        <th scope="col">Register User</th>
+        <th scope="col">Payment Type</th>
+        <th scope="col">Total Amount</th>
+        <th scope="col">Date</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="cursor:pointer;"
+        *ngFor="let invoice of invoices; let i = index"
+      >
+        <th scope="row">{{invoice.invoiceId}}</th>
+        <td>
+          {{ invoice.customerId  }}
+          <!-- Use GetName pipe here -->
+        </td>
+        <td>{{ invoice.regUser}}</td>
+        <td>{{ invoice.paymentType }}</td>
+        <td>{{ invoice.totalAmount | currency }}</td>
+        <td>{{ invoice.date }}</td>
+        <td>
+          <a (click)="openDetails(invoice.invoiceId)">Edit</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

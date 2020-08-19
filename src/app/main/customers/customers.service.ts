@@ -5,7 +5,7 @@ import { apiURL } from '../../config/config';
 
 import { Customer } from './customers.model'
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class CustomersService {
   customersChanged = new Subject<Customer[]>();
 
@@ -16,19 +16,19 @@ export class CustomersService {
   ) { }
 
   getCustomers() {
-    /* this.http.get(apiURL + 'api/listCust').subscribe(
+    this.http.get('https://pos-system-ccbc8.firebaseio.com/customers.json').subscribe(
       (customers: Customer[]) => {
         console.log(customers);
         this.setCustomers(customers);
       }
-    ) */
+    )
     return this.customers.slice();
   }
 
   setCustomers(customers: Customer[]) {
-    console.log("setCustomers--->",customers)
+    console.log("setCustomers--->", customers)
     this.customers = [];
-    for( let i = 0; i< customers.length; i++ ){
+    for (let i = 0; i < customers.length; i++) {
       this.customers.push(new Customer(customers[i]));
     }
     this.customersChanged.next(this.customers.slice());
@@ -41,11 +41,11 @@ export class CustomersService {
   addCustomer(customer: Customer) {
     this.customers.push(customer);
     const body = this.customers;
-   /*  this.http.post(apiURL + 'api/addCust', body).subscribe(
-        response => {
-          console.log('CustomersService:addCustomer-->',response);
-        }
-    ); */
+    this.http.post('https://pos-system-ccbc8.firebaseio.com/customers.json', body).subscribe(
+      response => {
+        console.log('CustomersService:addCustomer-->', response);
+      }
+    );
     this.customersChanged.next(this.customers.slice());
   }
 
@@ -55,7 +55,7 @@ export class CustomersService {
   }
 
   deleteProduct(index: number) {
-    this.customers.splice(index,1);
+    this.customers.splice(index, 1);
     this.customersChanged.next(this.customers.slice());
   }
 
