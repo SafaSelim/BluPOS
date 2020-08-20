@@ -14,11 +14,15 @@ export class CustomerEditComponent implements OnInit {
   editMode: boolean = false;
   customerForm: FormGroup;
 
+  customers: Customer[] = [];
+
   constructor(
     private customersService: CustomersService,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) {
+    this.customers = this.customersService.getCustomers();
+   }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -32,7 +36,16 @@ export class CustomerEditComponent implements OnInit {
 
   onSubmit() {
     console.log(this.customerForm);
-    const newCustomer = new Customer(this.customerForm.value);
+    let custId = 0;
+    custId = this.customers.length + 1;
+    const newCustomer = new Customer({
+      'customerId': custId,
+      'firstName' : this.customerForm.value['firstName'],
+      'lastName' : this.customerForm.value['lastName'],
+      'contact' : this.customerForm.value['contact'],
+      'address' : this.customerForm.value['address'],
+    });
+
     console.log("newCustomer",newCustomer);
     if (this.editMode) {
       this.customersService.updCustomer(this.id, newCustomer);
@@ -44,17 +57,23 @@ export class CustomerEditComponent implements OnInit {
   }
 
   private initForm() {
-    let customer: Customer = null;
+    let firstName = "";
+    let lastName = "";
+    let contact = "";
+    let address = "";
     if (this.editMode) {
-      customer = this.customersService.getCustomer(this.id);
-
+      const customer = this.customersService.getCustomer(this.id);
+      firstName = customer.firstName;
+      lastName = customer.lastName;
+      contact = customer.contact;
+      address = customer.address;
     }
 
     this.customerForm = new FormGroup({
-      'firstName': new FormControl(customer.firstName, Validators.required),
-      'lastName': new FormControl(customer.lastName, Validators.required),
-      'contact': new FormControl(customer.contact, Validators.required),
-      'address': new FormControl(customer.address, Validators.required),
+      'firstName': new FormControl(firstName, Validators.required),
+      'lastName': new FormControl(lastName, Validators.required),
+      'contact': new FormControl(contact, Validators.required),
+      'address': new FormControl(address, Validators.required),
     });
   }
 

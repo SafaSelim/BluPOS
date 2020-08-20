@@ -21,6 +21,8 @@ export class ProductEditComponent implements OnInit {
   productUnits: ProductUnits[] = [];
   productCategories: ProductCategories[] = [];
 
+  products: Product[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
@@ -40,14 +42,16 @@ export class ProductEditComponent implements OnInit {
         console.log(this.editMode);
       });
 
-
+      this.products = this.productsService.getProducts();
 
   }
 
   onSubmit() {
     console.log(this.productForm);
+    let prodId = 0;
+    prodId = this.products.length + 1;
     const newProduct = new Product({
-      'productId': 0,
+      'productId': prodId,
       'productName' : this.productForm.value['prodName'],
       'imgPath' : this.productForm.value['imgPath'],
       'productCode' : this.productForm.value['prodCode'],
