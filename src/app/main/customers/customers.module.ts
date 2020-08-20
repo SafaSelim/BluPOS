@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomersRoutingModule } from './customers-routing.module';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 import { CustomersComponent } from './customers.component';
@@ -25,6 +26,7 @@ import { CustomerStartComponent } from './customer-start/customer-start.componen
     RouterModule,
     ReactiveFormsModule,
     CustomersRoutingModule,
+    SharedModule,
   ],
 })
 export class CustomersModule { }

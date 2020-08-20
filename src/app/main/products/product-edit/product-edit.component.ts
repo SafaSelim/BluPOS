@@ -3,6 +3,10 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from '../products.service';
 import { Product } from '../products.model';
+import { take } from 'rxjs/operators';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { ProductUnits, ProductCategories } from 'src/app/shared/shared.model';
+
 
 @Component({
   selector: 'app-product-edit',
@@ -14,11 +18,18 @@ export class ProductEditComponent implements OnInit {
   editMode: boolean = false;
   productForm: FormGroup;
 
+  productUnits: ProductUnits[] = [];
+  productCategories: ProductCategories[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
+    private dataStorageService: DataStorageService,
     private router: Router,
-  ) { }
+  ) {
+    this.productUnits = this.dataStorageService.productUnits;
+    this.productCategories = this.dataStorageService.productCategories;
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe(
@@ -28,16 +39,19 @@ export class ProductEditComponent implements OnInit {
         this.initForm();
         console.log(this.editMode);
       });
+
+
+
   }
 
   onSubmit() {
     console.log(this.productForm);
     const newProduct = new Product({
-      'prodId': 0,
-      'prodName' : this.productForm.value['prodName'],
+      'productId': 0,
+      'productName' : this.productForm.value['prodName'],
       'imgPath' : this.productForm.value['imgPath'],
-      'prodCode' : this.productForm.value['prodCode'],
-      'prodCatId' : this.productForm.value['prodCatId'],
+      'productCode' : this.productForm.value['prodCode'],
+      'productCatId' : this.productForm.value['prodCatId'],
       'unitInStock' : this.productForm.value['unitInStock'],
       'uom' : this.productForm.value['uom'],
       'price' : this.productForm.value['price'],

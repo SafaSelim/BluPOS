@@ -42,7 +42,10 @@
         <div class="col-xs-12">
           <div class="form-group">
             <label for="prodCatId">Product Category</label>
-            <input type="text" formControlName="prodCatId" id="prodCatId" class="form-control" />
+            <!-- <input type="text" formControlName="prodCatId" id="prodCatId" class="form-control" /> -->
+            <select class="form-control" formControlName="prodCatId" id="prodCatId">
+              <option *ngFor="let prodCat of productCategories" [value]="prodCat.productCatId"> {{ prodCat.productCatName}}</option>
+            </select>
           </div>
         </div>
       </div>
@@ -53,7 +56,11 @@
         </div>
         <div class="form-group col-xs-5">
           <label for="uom">Unit Of Measure</label>
-          <input type="text" formControlName="uom" id="uom" class="form-control" />
+          <!-- <input type="text" formControlName="uom" id="uom" class="form-control" /> -->
+          <select class="form-control" formControlName="uom" id="uom">
+            <option *ngFor="let prodUnit of productUnits" [value]="prodUnit.unitId"> {{ prodUnit.unitName}}</option>
+          </select>
+
         </div>
       </div>
       <div class="row">

@@ -17,7 +17,7 @@ export class ProductsResolverService implements Resolve<Product[]> {
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const products = this.productsService.getProducts();
+    const products = this.productsService.products;
 
     if (products.length === 0) {
       return this.dataStorageService.fetchProducts();

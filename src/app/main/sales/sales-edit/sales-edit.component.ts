@@ -3,6 +3,8 @@ import { Sales } from '../sales.model';
 import { SalesService } from '../sales.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ProductsService } from '../../products/products.service';
+import { Product } from '../../products/products.model';
 
 @Component({
   selector: 'app-sales-edit',
@@ -16,7 +18,16 @@ export class SalesEditComponent implements OnInit, OnDestroy {
   editedItemIndex: number;
   editedItem: Sales;
 
-  constructor(private salesService: SalesService) { }
+  products: Product[] = [];
+
+  price: number = 0;
+
+  constructor(
+    private salesService: SalesService,
+    private productsService: ProductsService,
+    ) {
+      this.products = this.productsService.products;
+     }
 
   ngOnInit(): void {
     this.subscription = this.salesService.startedEditing.subscribe(
@@ -49,6 +60,16 @@ export class SalesEditComponent implements OnInit, OnDestroy {
     }
     this.editMode = false;
     form.reset();
+  }
+
+  onProdChange(val) {
+    console.log(val);
+    let tempProducts = this.products;
+    tempProducts.forEach(el => {
+      if(el.productId == val) {
+        this.price = el.price;
+      }
+    });
   }
 
   onClear() {

@@ -4,7 +4,7 @@
   style="cursor: pointer;"
   class="list-group-item clearfix"
 >
-     <div class="pull-left">
+   <!--   <div class="pull-left">
     <h4 class="list-group-item-heading">
     {{ product.productName }}
     </h4>
@@ -19,6 +19,17 @@
       class="img-responsive"
       style="max-height: 50px;"
     />
-  </span>
+  </span> -->
+    <img
+      [src]="product.imgPath"
+      alt="{{ product.productName }}"
+      class="img-responsive card-img-top"
+      style="width: 150px; height: 150px;"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ product.productName }} ( {{ product.productCode }} )</h5>
+      <p class="card-text">Price: {{ product.price | currency }}</p>
+      <p [ngStyle]="{ color: product.unitInStock == 0 ? 'red' : 'green' }">{{ product.unitInStock > 0 ? "In Stock" : "Out of Stock" }}</p>
+    </div>
 
 </a>

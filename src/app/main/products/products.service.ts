@@ -4,27 +4,32 @@ import { SalesService } from '../sales/sales.service';
 import { Subject } from 'rxjs';
 import { apiURL } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
   productsChanged = new Subject<Product[]>();
 
-  private products: Product[] = [];
+  products: Product[] = [];
 
   constructor(
     private salesService: SalesService,
     private http: HttpClient,
   ) { }
 
+
+
   getProducts() {
-    /* this.http.get("https://pos-system-ccbc8.firebaseio.com/products.json").subscribe(
-      (products: Product[]) => {
-        console.log(products);
-        this.setProducts(products);
-      }
-    ) */
-    return this.products.slice();
+  this.http.get("https://pos-system-ccbc8.firebaseio.com/products.json").subscribe(
+    (products: Product[]) => {
+      console.log(products);
+      this.setProducts(products);
+    }
+  )
+  return this.products.slice();
   }
+
+
 
   setProducts(products: Product[]) {
     console.log("setProducts--->", products)
@@ -49,7 +54,7 @@ export class ProductsService {
     this.productsChanged.next(this.products.slice());
     /*  const body = this.products;
     console.log(body)
-    this.http.post("https://pos-system-ccbc8.firebaseio.com/products.json/products.json", body).subscribe(
+    this.http.put("https://pos-system-ccbc8.firebaseio.com/products.json", body).subscribe(
       response => {
         console.log('ProductsService:addProduct-->',response);
       }

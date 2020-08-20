@@ -8,7 +8,7 @@ import { InvoicesComponent } from './invoices.component';
 
 @NgModule({
   declarations: [
-    // InvoicesComponent,
+    InvoicesComponent,
   ],
   imports: [
     RouterModule,

@@ -41,7 +41,7 @@ export class CustomersService {
   addCustomer(customer: Customer) {
     this.customers.push(customer);
     const body = this.customers;
-    this.http.post('https://pos-system-ccbc8.firebaseio.com/customers.json', body).subscribe(
+    this.http.put('https://pos-system-ccbc8.firebaseio.com/customers.json', body).subscribe(
       response => {
         console.log('CustomersService:addCustomer-->', response);
       }

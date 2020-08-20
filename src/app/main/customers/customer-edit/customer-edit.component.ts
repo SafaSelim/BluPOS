@@ -51,7 +51,7 @@ export class CustomerEditComponent implements OnInit {
     }
 
     this.customerForm = new FormGroup({
-      'firtName': new FormControl(customer.firstName, Validators.required),
+      'firstName': new FormControl(customer.firstName, Validators.required),
       'lastName': new FormControl(customer.lastName, Validators.required),
       'contact': new FormControl(customer.contact, Validators.required),
       'address': new FormControl(customer.address, Validators.required),

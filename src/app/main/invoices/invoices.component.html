@@ -13,20 +13,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr style="cursor:pointer;"
+      <tr
+        style="cursor: pointer;"
         *ngFor="let invoice of invoices; let i = index"
       >
-        <th scope="row">{{invoice.invoiceId}}</th>
-        <td>
-          {{ invoice.customerId  }}
-          <!-- Use GetName pipe here -->
-        </td>
-        <td>{{ invoice.regUser}}</td>
-        <td>{{ invoice.paymentType }}</td>
+        <th scope="row">{{ invoice.invoiceId }}</th>
+        <td>{{ invoice.customerId |getname:customers:'customerId':'firstName' }} {{ invoice.customerId |getname:customers:'customerId':'lastName' }}</td>
+        <td>{{ invoice.regUser | getname:users:'userId':'firstName'}} {{ invoice.regUser | getname:users:'userId':'lastName'}}</td>
+        <td>{{ invoice.paymentType | getname: paymentTypes:"id":"name" }}</td>
         <td>{{ invoice.totalAmount | currency }}</td>
-        <td>{{ invoice.date }}</td>
+        <td>{{ invoice.date | date }}</td>
         <td>
-          <a (click)="openDetails(invoice.invoiceId)">Edit</a>
+          <a (click)="openDetails(invoice.invoiceId)">Details</a>
         </td>
       </tr>
     </tbody>
