@@ -34,13 +34,14 @@
               <th></th>
               <th style="text-align:end">Total Amount:</th>
               <th>
-                 {{ totalAmount }}
+                 {{ totalAmount | currency }}
               </th>
             </tr>
           </tbody>
         </table>
 
-        <button class="btn btn-primary" style="margin: 10px;">Get Payment</button>
+        <button class="btn btn-primary" style="margin: 10px;" >Checkout</button>
+        <!-- (click)="openCheckout(checkoutModal)" -->
       </ul>
     </div>
 <!--     <div class="col-xs-6">
@@ -73,4 +74,18 @@
 
 </div>
 
-<!-- <i class="material-icons">settings</i> -->
+<!-- <ng-template #checkoutModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Checkout Modal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Checkout Modal
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+  </div>
+</ng-template>
+ -->

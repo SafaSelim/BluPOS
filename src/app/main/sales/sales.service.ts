@@ -106,7 +106,7 @@ export class SalesService {
       productId: product.productId,
       quantity: 1,
       price: product.price,
-      subTotal: product.price * 1,
+      subTotal: product.price,
     },]
     this.sales.push(...sale);
     console.log('sales--->', this.sales);
