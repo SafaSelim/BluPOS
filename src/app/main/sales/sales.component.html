@@ -18,7 +18,7 @@
           <tbody>
             <tr style="cursor:pointer;"
               *ngFor="let sale of sales; let i = index"
-              (click)="onEditProductItem(i)"
+              (click)="onEditProductItem(sale.productId)"
             >
               <th scope="row">{{i + 1}}</th>
               <td>
@@ -27,6 +27,15 @@
               <td>{{ sale.price | currency }}</td>
               <td>{{ sale.quantity }}</td>
               <td>{{ sale.quantity * sale.price | currency }}</td>
+            </tr>
+            <tr *ngIf="sales?.length != 0">
+              <th></th>
+              <th></th>
+              <th></th>
+              <th style="text-align:end">Total Amount:</th>
+              <th>
+                 {{ totalAmount }}
+              </th>
             </tr>
           </tbody>
         </table>

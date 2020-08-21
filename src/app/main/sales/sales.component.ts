@@ -15,21 +15,49 @@ export class SalesComponent implements OnInit, OnDestroy {
   sales: Sales[];
   salesChangeSub: Subscription;
   products: Product[] = [];
+  totalAmount: number;
 
   constructor(
     private salesService: SalesService,
     private productsService: ProductsService,
-    ) {
-      this.products = this.productsService.getProducts();
-     }
+  ) {
+    this.products = this.productsService.getProducts();
+  }
 
   ngOnInit(): void {
     this.sales = this.salesService.getSales();
     this.salesChangeSub = this.salesService.salesChanged.subscribe(
       (sales: Sales[]) => {
-          this.sales = sales;
+        this.sales = sales;
+        console.log(this.sales);
+        /*this.sales = this.sales.filter(el => {
+          return el.invoiceId == null || el.invoiceId == undefined;
+        }) */
+
+    /*     var result = [];
+        this.sales.reduce((res, val) => {
+          if (!res[val.productId]) {
+            res[val.productId] = {
+              salesId: val.salesId,
+              userId: val.userId,
+              invoiceId: val.invoiceId,
+              productId: val.productId,
+              quantity: 0,
+              price: val.price,
+              subTotal: val.subTotal,
+            };
+            result.push(res[val.productId]);
+          }
+          res[val.productId].quantity += val.quantity;
+          res[val.productId].subTotal = res[val.productId].quantity * val.price;
+          return res;
+        }, {});
+        console.log(result);
+        this.sales = result; */
+
       }
-    )
+    );
+
   }
 
   ngOnDestroy(): void {

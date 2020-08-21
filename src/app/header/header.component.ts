@@ -3,6 +3,8 @@ import { Subscription } from 'rxjs';
 
 import { DataStorageService } from '../shared/data-storage.service';
 import { AuthService } from '../auth/auth.service';
+import { SalesService } from '../main/sales/sales.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -12,11 +14,15 @@ import { AuthService } from '../auth/auth.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   collapsed = true;
   private userSub: Subscription;
+  private saleSub: Subscription;
   isAuthenticated = false;
+
+  currentItemOnBasket: number = 0;
 
   constructor(
     private dataStorageService: DataStorageService,
     private authService: AuthService,
+    private salesService: SalesService,
   ) {
 
    }
@@ -26,6 +32,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.isAuthenticated = !!user;
         console.log(!user);
         console.log(!!user);
+      });
+
+
+      this.saleSub = this.salesService.salesChanged.subscribe(saleItem => {
+        this.currentItemOnBasket = saleItem.length;
       });
     }
 
@@ -44,5 +55,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userSub.unsubscribe();
+    this.saleSub.unsubscribe();
   }
 }

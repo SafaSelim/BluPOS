@@ -5,7 +5,7 @@ import { DashboardComponent } from './main/dashboard/dashboard.component';
 import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/sales', pathMatch: 'full' },
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
   /* { path: 'products', loadChildren: './main/products/products.module#ProductsModule' },
   { path: 'customers', loadChildren: './main/customers/customers.module#CustomersModule' },
   { path: 'sales', loadChildren: './main/sales/sales.module#SalesModule' }, */

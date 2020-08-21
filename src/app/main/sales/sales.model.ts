@@ -9,13 +9,13 @@ export class Sales{
 
   constructor(sale) {
     console.log("SalesModel:constructor-->", sale);
-    this.salesId = sale.sales_id;
-    this.userId = sale.user_id || "";
-    this.invoiceId = sale.invoice_id || "";
-    this.productId = sale.product_id || "";
-    this.quantity = sale.quantity || "";
-    this.price = sale.price || "";
-    this.subTotal = sale.sub_total || "";
+    this.salesId = sale.salesId;
+    this.userId = sale.userId || null;
+    this.invoiceId = sale.invoiceId || null;
+    this.productId = sale.productId || null;
+    this.quantity = sale.quantity || null;
+    this.price = sale.price || null;
+    this.subTotal = sale.subTotal || null;
   }
 
 }

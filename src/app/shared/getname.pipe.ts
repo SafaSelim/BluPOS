@@ -6,10 +6,12 @@ import { PipeTransform, Pipe } from '@angular/core';
 export class GetNamePipe implements PipeTransform {
   transform(value: number, array: any[], keyExpr: string, displayExpr: string) {
     let name: string = "";
-    array = array.filter(el => {
-      return el[keyExpr] == value;
+    array.forEach(el => {
+      if (el[keyExpr] == value) {
+        name = el[displayExpr] || "";
+      }
     });
-    name = array[0][displayExpr] || "";
+
     return name;
   }
 }

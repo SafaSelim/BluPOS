@@ -31,10 +31,10 @@ export class SalesEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.salesService.startedEditing.subscribe(
-      (index: number) => {
-        this.editedItemIndex = index;
+      (productId: number) => {
+        this.editedItemIndex = productId;
         this.editMode = true;
-        this.editedItem = this.salesService.getSale(index);
+        this.editedItem = this.salesService.getSale(productId)[0];
         this.salesForm.setValue({
           prodId: this.editedItem.productId,
           quantity: this.editedItem.quantity,
@@ -48,10 +48,10 @@ export class SalesEditComponent implements OnInit, OnDestroy {
   onSubmit(form: NgForm) {
     const value = form.value;
     const newSale = new Sales({
-      product_id: value.prodId,
-      quantity: value.quantity,
-      price: value.price,
-      sub_total: (value.quantity * value.price),
+      productId: Number(value.prodId),
+      quantity: Number(value.quantity),
+      price: Number(value.price),
+      subTotal: Number(value.quantity * value.price),
     });
     if (this.editMode) {
       this.salesService.updateSale(this.editedItemIndex, newSale)
