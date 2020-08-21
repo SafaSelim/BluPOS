@@ -33,28 +33,6 @@ export class SalesComponent implements OnInit, OnDestroy {
         /*this.sales = this.sales.filter(el => {
           return el.invoiceId == null || el.invoiceId == undefined;
         }) */
-
-    /*     var result = [];
-        this.sales.reduce((res, val) => {
-          if (!res[val.productId]) {
-            res[val.productId] = {
-              salesId: val.salesId,
-              userId: val.userId,
-              invoiceId: val.invoiceId,
-              productId: val.productId,
-              quantity: 0,
-              price: val.price,
-              subTotal: val.subTotal,
-            };
-            result.push(res[val.productId]);
-          }
-          res[val.productId].quantity += val.quantity;
-          res[val.productId].subTotal = res[val.productId].quantity * val.price;
-          return res;
-        }, {});
-        console.log(result);
-        this.sales = result; */
-
       }
     );
 
