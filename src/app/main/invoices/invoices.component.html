@@ -1,5 +1,14 @@
+<h2>Invoices</h2>
+<!-- <div class="row">
+  <div class="col-xs-7 text-right float-right">
+    <mat-search-bar
+      (onEnter)="search($event)"
+      (onClose)="onSearchClose()"
+    ></mat-search-bar>
+  </div>
+</div> -->
+<app-invoice-details *ngIf="detailPopupVisibility" [message]="'Invoice Details'" (click)="onDetailClose()"></app-invoice-details>
 <div class="row">
-  <h2>Invoices</h2>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -18,14 +27,22 @@
         *ngFor="let invoice of invoices; let i = index"
       >
         <th scope="row">{{ invoice.invoiceId }}</th>
-        <td>{{ invoice.customerId |getname:customers:'customerId':'firstName' }} {{ invoice.customerId |getname:customers:'customerId':'lastName' }}</td>
-        <td>{{ invoice.regUser | getname:users:'userId':'firstName'}} {{ invoice.regUser | getname:users:'userId':'lastName'}}</td>
+        <td>
+          {{
+            invoice.customerId | getname: customers:"customerId":"firstName"
+          }}
+          {{ invoice.customerId | getname: customers:"customerId":"lastName" }}
+        </td>
+        <td>
+          {{ invoice.regUser | getname: users:"userId":"firstName" }}
+          {{ invoice.regUser | getname: users:"userId":"lastName" }}
+        </td>
         <td>{{ invoice.paymentType | getname: paymentTypes:"id":"name" }}</td>
         <td>{{ invoice.totalAmount | currency }}</td>
         <td>{{ invoice.date | date }}</td>
-        <td>
+      <!--   <td>
           <a (click)="openDetails(invoice.invoiceId)">Details</a>
-        </td>
+        </td> -->
       </tr>
     </tbody>
   </table>
