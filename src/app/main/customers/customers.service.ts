@@ -51,6 +51,12 @@ export class CustomersService {
 
   updCustomer(index: number, newCustomer: Customer) {
     this.customers[index] = newCustomer;
+    const body = this.customers;
+    this.http.put('https://pos-system-ccbc8.firebaseio.com/customers.json', body).subscribe(
+      response => {
+        console.log('CustomersService:addCustomer-->', response);
+      }
+    );
     this.customersChanged.next(this.customers.slice());
   }
 

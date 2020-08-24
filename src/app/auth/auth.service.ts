@@ -7,6 +7,8 @@ import { apiURL, firebaseApiURL } from "../config/config";
 import { User } from './user.model';
 import { Router } from '@angular/router';
 
+import { environment } from '../../environments/environment';
+
 export interface AuthResponseData {
   kind: string;
   idToken: string;
@@ -34,7 +36,7 @@ export class AuthService {
       password: password,
       returnSecureToken: true,
     }
-    return this.http.post<AuthResponseData>(firebaseApiURL + 'v1/accounts:signUp?key=AIzaSyCTpFZH6J2GXfuyn4G-A0kLSm4nMnzwlRA', body)
+    return this.http.post<AuthResponseData>(firebaseApiURL + 'v1/accounts:signUp?key=' + environment.firebaseApiKey, body)
       .pipe(
         catchError(this.handleError),
         tap(resData => {
@@ -93,7 +95,7 @@ export class AuthService {
       password: password,
       returnSecureToken: true
     }
-    return this.http.post<AuthResponseData>(firebaseApiURL + 'v1/accounts:signInWithPassword?key=AIzaSyCTpFZH6J2GXfuyn4G-A0kLSm4nMnzwlRA', body)
+    return this.http.post<AuthResponseData>(firebaseApiURL + 'v1/accounts:signInWithPassword?key=' + environment.firebaseApiKey, body)
       .pipe(
         catchError(this.handleError),
         tap(resData => {

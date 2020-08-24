@@ -5,46 +5,19 @@
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="prodId">Product</label>
-          <!-- This Should be selectbox -->
-          <!-- This value should came automatically -->
-         <!--  <input
-            type="text"
-            id="prodId"
-            class="form-control"
-            name="prodId"
-            ngModel
-            required
-          /> -->
-          <select class="form-control" ngModel id="prodId"  name="prodId" required (change)="onProdChange($event.target.value)">
-            <option *ngFor="let product of products" [value]="product.productId"> {{ product.productName}}</option>
+          <select
+            class="form-control" ngModel id="prodId" name="prodId" required (change)="onProdChange($event.target.value)">
+            <option *ngFor="let product of products" [value]="product.productId">
+              {{ product.productName }}</option>
           </select>
         </div>
         <div class="col-sm-2 form-group">
           <label for="quantity">Quantity</label>
-          <input
-            type="number"
-            id="quantity"
-            class="form-control"
-            name="quantity"
-            ngModel
-            required
-            [min]="0"
-            pattern="^[1-9]+[0-9]*$"
-          />
+          <input type="number" id="quantity" class="form-control" name="quantity" ngModel required [min]="0" pattern="^[1-9]+[0-9]*$"/>
         </div>
         <div class="col-sm-2 form-group">
           <label for="price">Price</label>
-          <!-- This value should came automatically -->
-          <input
-            type="number"
-            id="price"
-            class="form-control"
-            name="price"
-            [(ngModel)]="price"
-            required
-            readonly
-            pattern="^(?:[1-9]\d*|0)?(?:\.\d+)?$"
-          />
+          <input type="number" id="price" class="form-control" name="price" [(ngModel)]="price" required readonly pattern="^(?:[1-9]\d*|0)?(?:\.\d+)?$"/>
         </div>
       </div>
       <div class="row">

@@ -1,6 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 
-// import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { Sales } from './sales.model';
 import { SalesService } from './sales.service';
@@ -18,14 +17,12 @@ export class SalesComponent implements OnInit, OnDestroy {
   salesChangeSub: Subscription;
   products: Product[] = [];
   totalAmount: number = 0;
+  taxAmount: number = 0;
 
-  //Modal
-  // closeResult: string;
 
   constructor(
     private salesService: SalesService,
     private productsService: ProductsService,
-    // private modalService: NgbModal,
   ) {
     this.products = this.productsService.getProducts();
   }
@@ -40,9 +37,10 @@ export class SalesComponent implements OnInit, OnDestroy {
           return el.invoiceId == null || el.invoiceId == undefined;
         }) */
         this.totalAmount = 0;
-        for(let i=0; i< this.sales.length; i++) {
+        for (let i = 0; i < this.sales.length; i++) {
           this.totalAmount += this.sales[i].subTotal;
         }
+        this.taxAmount = this.totalAmount * (18 / 100);
       }
     );
 
@@ -55,26 +53,5 @@ export class SalesComponent implements OnInit, OnDestroy {
   onEditProductItem(index: number) {
     this.salesService.startedEditing.next(index);
   }
-
-  //Modal
-/*   openCheckout(content) {
-    console.log(content);
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  } */
-
-  //Modal
-  /* private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  } */
 
 }

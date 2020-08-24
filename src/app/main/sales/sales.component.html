@@ -1,6 +1,6 @@
-<div class="container-fluid">
+
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-7">
       <app-sales-edit></app-sales-edit>
       <hr />
       <ul class="list-group">
@@ -16,13 +16,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr style="cursor:pointer;"
+            <tr
+              style="cursor: pointer;"
               *ngFor="let sale of sales; let i = index"
               (click)="onEditProductItem(sale.productId)"
             >
-              <th scope="row">{{i + 1}}</th>
+              <th scope="row">{{ i + 1 }}</th>
               <td>
-                {{ sale.productId | getname: products:"productId":"productName" }}
+                {{
+                  sale.productId | getname: products:"productId":"productName"
+                }}
               </td>
               <td>{{ sale.price | currency }}</td>
               <td>{{ sale.quantity }}</td>
@@ -32,60 +35,21 @@
               <th></th>
               <th></th>
               <th></th>
-              <th style="text-align:end">Total Amount:</th>
+              <th style="text-align: end;">Total Amount:</th>
               <th>
-                 {{ totalAmount | currency }}
+                {{ totalAmount | currency }}
               </th>
             </tr>
           </tbody>
         </table>
 
-        <button class="btn btn-primary" style="margin: 10px;" >Checkout</button>
-        <!-- (click)="openCheckout(checkoutModal)" -->
+        <!-- <button class="btn btn-primary" style="margin: 10px;">Checkout</button> -->
+        <!-- (click)="openCheckout()" -->
       </ul>
     </div>
-<!--     <div class="col-xs-6">
-      <h3>Products</h3>
-      <div class="row">
-        <div
-          class="col-xs-4"
-          style="margin-bottom: 20px;"
-          *ngFor="let productEl of products; let i = index"
-        >
-          <div class="card" style="width: 20rem;">
-            <img
-              [src]="productEl.imgPath"
-              alt="{{ productEl.productName }}"
-              class="img-responsive card-img-top"
-              style="max-height: 50px;"
-            />
-            <div class="card-block">
-              <h4 class="card-title">{{ productEl.productName }}</h4>
-              <p class="card-text">Price: {{ productEl.price }}</p>
-              <button class="add-to-cart btn btn-success">
-                Add
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+    <div class="col-xs-5">
+      <app-checkout [totalAmount]="totalAmount" [taxAmount]="taxAmount"></app-checkout>
+    </div>
   </div>
 
-</div>
 
-<!-- <ng-template #checkoutModal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Checkout Modal</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    Checkout Modal
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
-  </div>
-</ng-template>
- -->

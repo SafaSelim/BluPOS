@@ -1,0 +1,50 @@
+<h3>Checkout</h3>
+<form (ngSubmit)="onSubmit(checkoutForm)" #checkoutForm="ngForm">
+  <div class="row">
+    <div class="col-xs-7 form-group">
+      <label for="customerId">Customer</label>
+      <select class="form-control" ngModel id="customerId" name="customerId" required>
+        <option
+          *ngFor="let customer of customers"
+          [value]="customer.customerId"
+        >
+          {{ customer.firstName }} {{ customer.lastName }}</option
+        >
+      </select>
+    </div>
+      <div class="col-xs-7 form-group">
+        <label for="paymentType">Payment Type</label>
+        <select class="form-control" ngModel id="paymentType" name="paymentType" required>
+          <option
+            *ngFor="let paymentType of paymentTypes"
+            [value]="paymentType.id"
+          >
+            {{ paymentType.name }}</option
+          >
+        </select>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Net: {{ totalAmount - taxAmount | currency }}</h4>
+      <p>Tax: {{ taxAmount | currency }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Total Amount: {{ totalAmount | currency }}</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <button
+        class="btn btn-success"
+        style="margin-right: 10px;"
+        type="submit"
+        [disabled]="!checkoutForm.valid"
+      >
+        Confirm Sale
+      </button>
+    </div>
+  </div>
+</form>
