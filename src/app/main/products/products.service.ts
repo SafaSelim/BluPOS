@@ -20,13 +20,13 @@ export class ProductsService {
 
 
   getProducts() {
-  this.http.get("https://pos-system-ccbc8.firebaseio.com/products.json").subscribe(
-    (products: Product[]) => {
-      console.log(products);
-      this.setProducts(products);
-    }
-  )
-  return this.products.slice();
+    this.http.get("https://pos-system-ccbc8.firebaseio.com/products.json").subscribe(
+      (products: Product[]) => {
+        console.log(products);
+        this.setProducts(products);
+      }
+    )
+    return this.products.slice();
   }
 
 
@@ -52,13 +52,13 @@ export class ProductsService {
   addProduct(product: Product) {
     this.products.push(product);
     this.productsChanged.next(this.products.slice());
-    /*  const body = this.products;
+    const body = this.products;
     console.log(body)
     this.http.put("https://pos-system-ccbc8.firebaseio.com/products.json", body).subscribe(
       response => {
-        console.log('ProductsService:addProduct-->',response);
+        console.log('ProductsService:addProduct-->', response);
       }
-      ); */
+    );
   }
 
   updateProduct(index: number, newProduct: Product) {
