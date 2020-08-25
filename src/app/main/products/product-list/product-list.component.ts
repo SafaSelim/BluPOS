@@ -14,6 +14,7 @@ import { ProductCategories } from 'src/app/shared/shared.model';
 })
 export class ProductListComponent implements OnInit, OnDestroy {
   products: Product[] = [];
+  filteredProducts: Product[] = [];
   subscription: Subscription;
   collapsed = true;
 
@@ -35,6 +36,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
       }
     )
     this.products = this.productsService.getProducts();
+    this.filteredProducts = this.products;
     console.log("ProductListComponent",this.products);
   }
 
@@ -47,6 +49,18 @@ export class ProductListComponent implements OnInit, OnDestroy {
   }
 
   filterByCategory(categoryId: number) {
-    console.log(categoryId)
+    this.filteredProducts = this.products;
+    if(categoryId != 0){
+      this.filteredProducts = this.filteredProducts.filter(el => {
+        return el.productCatId == categoryId;
+      });
+    }
+  }
+
+  onAddToSales(productId: number) {
+    console.log(productId)
+    let product = this.productsService.getProduct(productId);
+    console.log(product);
+    this.productsService.addProductsToSales(product);
   }
 }

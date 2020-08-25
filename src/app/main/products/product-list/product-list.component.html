@@ -31,14 +31,14 @@
         <div
           class="card card-items"
           style="max-width: 18rem; margin: 10px; display: inline-block;"
-          *ngFor="let productEl of products; let i = index"
+          *ngFor="let productEl of filteredProducts; let i = index"
         >
           <app-product-item
             [product]="productEl"
             [index]="i"
           ></app-product-item>
           <div class="card-item" style="text-align: center">
-            <button class="btn btn-success btn-md add-button">Add to Cart</button>
+            <button class="btn btn-success btn-md add-button" type="button" (click)="onAddToSales(productEl.productId)" >Add to Cart</button>
           </div>
         </div>
       </div>

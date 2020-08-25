@@ -51,7 +51,7 @@ export class ProductEditComponent implements OnInit {
     let prodId = 0;
     prodId = this.products.length + 1;
     const newProduct = new Product({
-      'productId': prodId,
+      'productId': this.editMode ? this.id : prodId,
       'productName' : this.productForm.value['prodName'],
       'imgPath' : this.productForm.value['imgPath'],
       'productCode' : this.productForm.value['prodCode'],

@@ -40,8 +40,12 @@ export class ProductsService {
     this.productsChanged.next(this.products.slice());
   }
 
-  getProduct(index: number) {
-    return this.products[index];
+  getProduct(productId: number): Product {
+    let product: Product[] = this.products;
+    product = product.filter(el => {
+      return el.productId == productId;
+    })
+    return product[0];
   }
 
   addProductsToSales(product: Product) {
@@ -53,21 +57,46 @@ export class ProductsService {
     this.products.push(product);
     this.productsChanged.next(this.products.slice());
     const body = this.products;
-    console.log(body)
+    console.log('ProductsService:addProduct:body-->',body)
     this.http.put("https://pos-system-ccbc8.firebaseio.com/products.json", body).subscribe(
       response => {
-        console.log('ProductsService:addProduct-->', response);
+        console.log('ProductsService:addProduct:response-->', response);
       }
     );
   }
 
-  updateProduct(index: number, newProduct: Product) {
-    this.products[index] = newProduct;
+  updateProduct(productId: number, newProduct: Product) {
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].productId == productId) {
+        this.products[i] = newProduct;
+      }
+    }
+    console.log('ProductsService:updateProducts:products-->',this.products);
+    const body = this.products;
+    console.log('ProductsService:updateProducts:body-->',body)
+    this.http.put("https://pos-system-ccbc8.firebaseio.com/products.json", body).subscribe(
+      response => {
+        console.log('ProductsService:updateProducts:response-->', response);
+      }
+    );
     this.productsChanged.next(this.products.slice());
   }
 
-  deleteProduct(index: number) {
-    this.products.splice(index, 1);
+  deleteProduct(productId: number) {
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.products[i].productId == productId) {
+        this.products.splice(i,1);
+      }
+    }
+    console.log("ProductsService:deleteProduct:products--->",this.products);
+    const body = this.products;
+    console.log('ProductsService:updateProducts:body-->',body)
+    this.http.put("https://pos-system-ccbc8.firebaseio.com/products.json", body).subscribe(
+      response => {
+        console.log('ProductsService:deleteProduct:response-->', response);
+      }
+    );
+    // this.products.splice(index, 1);
     this.productsChanged.next(this.products.slice());
   }
 
