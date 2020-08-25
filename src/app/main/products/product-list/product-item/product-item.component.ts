@@ -9,7 +9,6 @@ import { ProductsService } from '../../products.service';
 })
 export class ProductItemComponent implements OnInit {
   @Input() product: Product;
-  @Input() index: number;
 
   ngOnInit(): void {
   }
