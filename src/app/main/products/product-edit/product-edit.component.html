@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-xs-7">
+    <h4> {{ editMode ? "Edit Product" : "Add New Product" }}</h4>
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-xs-12">
