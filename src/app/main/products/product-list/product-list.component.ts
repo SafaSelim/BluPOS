@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Product } from '../products.model';
 import { ProductsService } from '../products.service';
@@ -19,6 +19,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
   collapsed = true;
 
   productCategories: ProductCategories[] = [];
+  categoryName: string = "All Products";
+  clickedCat: number = 0;
 
   constructor(
     private productsService: ProductsService,
@@ -48,10 +50,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
-  filterByCategory(categoryId: number) {
+  filterByCategory(categoryId: number, categoryName: string) {
     this.filteredProducts = this.products;
+    this.categoryName = categoryName || "";
+    this.clickedCat = 0;
     if(categoryId != 0){
       this.filteredProducts = this.filteredProducts.filter(el => {
+        this.clickedCat = categoryId;
         return el.productCatId == categoryId;
       });
     }
