@@ -23,6 +23,9 @@ export class InvoicesComponent implements OnInit {
 
   detailPopupVisibility: boolean = false;
 
+  page = 1;
+  pageSize = 10;
+
   constructor(
     private invoicesService: InvoicesService,
     // private productsService: ProductsService,
@@ -30,8 +33,8 @@ export class InvoicesComponent implements OnInit {
   ) {
 
     this.paymentTypes = [
-      { "id": 1, "name": "Cash"},
-      { "id": 2, "name": "Credit Card"},
+      { "id": 1, "name": "Cash" },
+      { "id": 2, "name": "Credit Card" },
     ];
     this.users = this.dataStorageService.users;
     this.customers = this.dataStorageService.customers;
@@ -60,11 +63,11 @@ export class InvoicesComponent implements OnInit {
     this.detailPopupVisibility = false;
   }
 
-/*   search(e) {
-    console.log(e);
-  }
+  /*   search(e) {
+      console.log(e);
+    }
 
-  onSearchClose() {
+    onSearchClose() {
 
-  } */
+    } */
 }

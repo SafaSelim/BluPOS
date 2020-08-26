@@ -13,6 +13,9 @@ export class CustomerListComponent implements OnInit {
   customers: Customer[] = [];
   subscription: Subscription;
 
+  page = 1;
+  pageSize = 10;
+
   constructor(
     private customersService: CustomersService,
     private router: Router,

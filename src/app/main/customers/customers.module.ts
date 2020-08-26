@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CustomersRoutingModule } from './customers-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CustomersComponent } from './customers.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
@@ -27,6 +28,7 @@ import { CustomerStartComponent } from './customer-start/customer-start.componen
     ReactiveFormsModule,
     CustomersRoutingModule,
     SharedModule,
+    NgbModule,
   ],
 })
 export class CustomersModule { }

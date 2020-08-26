@@ -7,7 +7,7 @@ import { InvoicesRoutingModule } from './invoices-routing.module';
 import { InvoicesComponent } from './invoices.component';
 import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
 
-// import { NgMatSearchBarModule } from 'ng-mat-search-bar';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
     InvoicesRoutingModule,
     SharedModule,
 
-    // NgMatSearchBarModule,
+    NgbModule,
   ],
 })
 export class InvoicesModule { }
