@@ -43,12 +43,12 @@
               ></i>
           </td>
         </tr>
-        <tr>
+        <tr id="collapse1"
+          class="panel-collapse"
+          [class.collapse]="current != i">
           <td></td>
           <td colspan="6">
-            <app-invoice-details id="collapse1"
-            class="panel-collapse"
-            [class.collapse]="current != i" [sales]="invoice.sales"></app-invoice-details>
+            <app-invoice-details  [sales]="invoice.sales"></app-invoice-details>
           </td>
         </tr>
       </ng-container>

@@ -11,8 +11,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 
 import { HeaderComponent } from './header/header.component';
-import { DashboardComponent } from './main/dashboard/dashboard.component';
-import { AuthComponent } from './auth/auth.component';
 
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AlertComponent } from './shared/alert/alert.component';
@@ -23,9 +21,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
   declarations: [
     AppComponent,
 
-    DashboardComponent,
     HeaderComponent,
-    AuthComponent,
 
     LoadingSpinnerComponent,
     AlertComponent,
@@ -34,7 +30,6 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    FormsModule,
     HttpClientModule,
 
     SharedModule,
