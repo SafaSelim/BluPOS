@@ -1,7 +1,28 @@
-<div class="backdrop" (click)="onClose()"></div>
-<div class="alert-box">
-  <p>{{ message }}</p>
-  <div class="alert-box-actions">
-    <button class="btn btn-primary" (click)="onClose()">Close</button>
-  </div>
-</div>
+<table class="table table-condensed">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Product</th>
+      <th scope="col">Price</th>
+      <th scope="col">Qty</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      style="cursor: pointer;"
+      *ngFor="let sale of sales; let i = index"
+    >
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        {{
+          sale.productId | getname: products:"productId":"productName"
+        }}
+      </td>
+      <td>{{ sale.price | currency }}</td>
+      <td>{{ sale.quantity }}</td>
+      <td>{{ sale.quantity * sale.price | currency }}</td>
+    </tr>
+
+  </tbody>
+</table>

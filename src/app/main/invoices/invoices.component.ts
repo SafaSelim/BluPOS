@@ -3,10 +3,12 @@ import { Subscription } from 'rxjs';
 import { InvoicesService } from './invoices.service';
 
 import { Invoice } from './invoices.model';
-// import { ProductsService } from '../products/products.service';
 import { Users } from '../../shared/shared.model';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Customer } from '../customers/customers.model';
+
+import { InvoiceDetailsComponent } from './invoice-details/invoice-details.component';
+import { SalesService } from '../sales/sales.service';
 
 @Component({
   selector: 'app-invoices',
@@ -21,14 +23,13 @@ export class InvoicesComponent implements OnInit {
   paymentTypes: any[] = [];
   customers: Customer[] = [];
 
-  detailPopupVisibility: boolean = false;
-
   page = 1;
   pageSize = 10;
 
+  current: number = -1;
+
   constructor(
     private invoicesService: InvoicesService,
-    // private productsService: ProductsService,
     private dataStorageService: DataStorageService,
   ) {
 
@@ -53,16 +54,6 @@ export class InvoicesComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
-  openDetails(invoiceId: number) {
-    console.log(invoiceId);
-    this.detailPopupVisibility = true;
-  }
-
-  onDetailClose() {
-    this.detailPopupVisibility = false;
-  }
-
   /*   search(e) {
       console.log(e);
     }

@@ -32,22 +32,6 @@ export class CheckoutService {
     let invoiceId = this.invoices.length + 1;
     let salesId = this.allSales.length + 1;
 
-    const invoiceBody: Invoice = {
-      customerId: data.customerId,
-      date: (new Date()).toString(),
-      invoiceId: invoiceId,
-      paymentType: data.paymentType,
-      regUser: 4,
-      totalAmount: totalAmount
-    }
-
-    this.invoices.push(invoiceBody);
-    this.http.put('https://pos-system-ccbc8.firebaseio.com/invoices.json', this.invoices).subscribe(
-      response => {
-        console.log('checkout service: create invoice-->', response);
-      }
-    );
-
     this.sales.forEach(el => {
       el.invoiceId = invoiceId;
       el.salesId = salesId;
@@ -57,12 +41,31 @@ export class CheckoutService {
     });
     console.log(this.allSales);
 
+    const invoiceBody: Invoice = {
+      customerId: data.customerId,
+      date: (new Date()).toString(),
+      invoiceId: invoiceId,
+      paymentType: data.paymentType,
+      regUser: 4,
+      totalAmount: totalAmount,
+      sales: this.sales
+    }
+
+    this.invoices.push(invoiceBody);
+    this.http.put('https://pos-system-ccbc8.firebaseio.com/invoices.json', this.invoices).subscribe(
+      response => {
+        console.log('checkout service: create invoice-->', response);
+      }
+    );
+
+
+
     this.http.put('https://pos-system-ccbc8.firebaseio.com/sales.json', this.allSales).subscribe(
       response => {
         console.log('checkout service: create sales-->', response);
       }
     );
-      
+
     this.sales = [];
     this.salesService.setSales(this.sales);
   }

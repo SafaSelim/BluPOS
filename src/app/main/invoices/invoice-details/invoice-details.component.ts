@@ -1,4 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+
+import { Sales } from '../../sales/sales.model';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { Product } from '../../products/products.model';
 
 @Component({
   selector: 'app-invoice-details',
@@ -6,16 +10,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./invoice-details.component.scss']
 })
 export class InvoiceDetailsComponent implements OnInit {
-  @Input()  message: string = "";
-  @Output() closeModal = new EventEmitter<void>();
+  @Input()  invoiceId: number;
+  @Input() sales?: Sales[];
 
-  constructor() { }
+  products: Product[];
+
+  constructor(
+    private dataStorageService: DataStorageService,
+  ) {
+    this.products = this.dataStorageService.products;
+   }
 
   ngOnInit(): void {
-  }
-
-  onClose() {
-    this.closeModal.emit();
   }
 
 }

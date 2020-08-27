@@ -1,3 +1,5 @@
+import { Sales } from '../sales/sales.model';
+
 export class Invoice {
   invoiceId: number;
   customerId: number;
@@ -5,6 +7,7 @@ export class Invoice {
   paymentType: number;
   totalAmount: number;
   date: string;
+  sales?: Sales[];
 
 
   constructor(invoice) {
@@ -15,5 +18,6 @@ export class Invoice {
     this.paymentType = invoice.paymentType || null;
     this.totalAmount = invoice.totalAmount || null;
     this.date = invoice.date || "";
+    this.sales = invoice.sales || [];
   }
 }
