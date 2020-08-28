@@ -54,11 +54,13 @@ export class InvoicesComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-  /*   search(e) {
-      console.log(e);
-    }
 
-    onSearchClose() {
+  onSearchEnter(value) {
+    console.log(value);
+  }
 
-    } */
+  onSearchClose() {
+
+  }
+
 }

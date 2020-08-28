@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { GetNamePipe } from './getname.pipe';
 import { DropdownDirective } from './dropdown.directive';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 declarations: [
@@ -11,6 +12,7 @@ declarations: [
 ],
 imports: [
   CommonModule,
+  FormsModule,
 ],
 exports:[
   GetNamePipe,

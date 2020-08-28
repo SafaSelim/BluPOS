@@ -20,9 +20,7 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 @NgModule({
   declarations: [
     AppComponent,
-
     HeaderComponent,
-
     LoadingSpinnerComponent,
     AlertComponent,
   ],

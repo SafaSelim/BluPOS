@@ -1,0 +1,26 @@
+<div class="input-group search-field" [@slideInOut]="searchVisible">
+  <input #input
+    type="text"
+    class="form-control"
+    [placeholder]="placeholder"
+    [(ngModel)]="value"
+    (blur)="onBlurring(input.value)"
+    (keyup.enter)="onEnterring(input.value)"
+    (focus)="onFocussing(input.value)"
+    autocapitalize="none">
+  <span class="input-group-btn">
+    <button class="btn btn-default" type="button">
+      <span class="search-icons" [class.search-icons--active]="searchVisible">
+        <span class="glyphicon glyphicon-remove-circle search-icons-close" (click)="close()" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-search search-icons-search" (click)="open()" aria-hidden="true"></span>
+      </span>
+    </button>
+  </span>
+
+ <!--  <span class="search-icons" [class.search-icons--active]="searchVisible">
+    <span class="glyphicon glyphicon-remove-circle search-icons-close" (click)="close()" aria-hidden="true"></span>
+    <span class="glyphicon glyphicon-search search-icons-search" (click)="open()" aria-hidden="true"></span>
+  </span> -->
+</div><!-- /input-group -->
+
+

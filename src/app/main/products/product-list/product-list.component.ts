@@ -68,4 +68,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
     console.log(product);
     this.productsService.addProductsToSales(product);
   }
+
+  onSearchEnter(value) {
+    console.log(value);
+  }
+
+  onSearchClose() {
+
+  }
 }

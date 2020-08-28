@@ -11,6 +11,8 @@ import { ProductItemComponent } from './product-list/product-item/product-item.c
 import { ProductStartComponent } from './product-start/product-start.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 
+import { SearchFilterModule } from '../../shared/search-filter/search-filter.module';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
     ReactiveFormsModule,
     ProductsRoutingModule,
     SharedModule,
+
+    SearchFilterModule,
   ],
 })
 export class ProductsModule { }

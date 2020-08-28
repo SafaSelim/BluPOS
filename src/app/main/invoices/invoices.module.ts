@@ -9,6 +9,8 @@ import { InvoiceDetailsComponent } from './invoice-details/invoice-details.compo
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { SearchFilterModule } from '../../shared/search-filter/search-filter.module';
+
 @NgModule({
   declarations: [
     InvoicesComponent,
@@ -21,6 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
 
     NgbModule,
+
+    SearchFilterModule,
   ],
 })
 export class InvoicesModule { }

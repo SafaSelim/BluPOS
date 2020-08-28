@@ -1,12 +1,11 @@
-<h2>Invoices</h2>
-<!-- <div class="row">
-  <div class="col-xs-7 text-right float-right">
-    <mat-search-bar
-      (onEnter)="search($event)"
-      (onClose)="onSearchClose()"
-    ></mat-search-bar>
+<div class="row">
+  <div class="col-md-4">
+    <h2 style="margin-top: 0px;">Invoices</h2>
   </div>
-</div> -->
+  <div class="col-md-8 pull-right">
+    <app-search-filter [placeholder]="'Search...'" (onEnter)="onSearchEnter($event)" (onClose)="onSearchClose()"></app-search-filter>
+  </div>
+</div>
 <div class="row">
   <table class="table table-striped">
     <thead>

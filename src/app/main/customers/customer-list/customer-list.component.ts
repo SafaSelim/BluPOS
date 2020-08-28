@@ -41,6 +41,12 @@ export class CustomerListComponent implements OnInit {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
+  onSearchEnter(value) {
+    console.log(value);
+  }
 
+  onSearchClose() {
+
+  }
 
 }

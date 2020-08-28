@@ -13,6 +13,8 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CustomerStartComponent } from './customer-start/customer-start.component';
 
+import { SearchFilterModule } from '../../shared/search-filter/search-filter.module';
+
 @NgModule({
   declarations: [
     CustomersComponent,
@@ -29,6 +31,8 @@ import { CustomerStartComponent } from './customer-start/customer-start.componen
     CustomersRoutingModule,
     SharedModule,
     NgbModule,
+
+    SearchFilterModule
   ],
 })
 export class CustomersModule { }
