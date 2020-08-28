@@ -1,7 +1,7 @@
 
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 
 import { SearchFilterComponent } from "./search-filter.component";
 
@@ -9,9 +9,7 @@ import { SearchFilterComponent } from "./search-filter.component";
   imports: [
     CommonModule,
     FormsModule,
-/*
-    //Reactive form
-    ReactiveFormsModule */
+
   ],
   exports: [SearchFilterComponent],
   declarations: [SearchFilterComponent]

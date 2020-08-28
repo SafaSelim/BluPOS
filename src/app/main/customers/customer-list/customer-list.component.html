@@ -32,7 +32,7 @@
       <tbody>
         <tr style="cursor:pointer;" [routerLink]="[i]"
         routerLinkActive="active"
-          *ngFor="let customer of customers; let i = index"
+          *ngFor="let customer of filteredCustomers; let i = index"
         >
           <th scope="row">{{i + 1}}</th>
           <td>

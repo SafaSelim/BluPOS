@@ -17,6 +17,7 @@ import { SalesService } from '../sales/sales.service';
 })
 export class InvoicesComponent implements OnInit {
   invoices: Invoice[] = [];
+  filteredInvoices: Invoice[] = [];
   subscription: Subscription;
 
   users: Users[] = [];
@@ -40,6 +41,7 @@ export class InvoicesComponent implements OnInit {
     this.users = this.dataStorageService.users;
     this.customers = this.dataStorageService.customers;
     this.invoices = this.dataStorageService.invoices;
+    this.filteredInvoices = this.invoices;
   }
 
   ngOnInit(): void {
@@ -49,6 +51,7 @@ export class InvoicesComponent implements OnInit {
       }
     )
     this.invoices = this.invoicesService.getInvoices();
+    this.filteredInvoices = this.invoices;
   }
 
   ngOnDestroy() {
@@ -57,10 +60,22 @@ export class InvoicesComponent implements OnInit {
 
   onSearchEnter(value) {
     console.log(value);
+    this.filteredInvoices = this.invoices;
+    let filteredCustomers: Customer[] = this.customers;
+    filteredCustomers = filteredCustomers.filter(el=> {
+      return el.firstName.toString().toLowerCase().indexOf(value.toLowerCase()) != -1 || el.lastName.toString().toLowerCase().indexOf(value.toLowerCase()) != -1;
+    });
+    console.log(this.filteredInvoices, filteredCustomers);
+    this.filteredInvoices = this.filteredInvoices.filter( el => {
+      for(let i = 0; i < filteredCustomers.length; i++) {
+        return filteredCustomers[i].customerId == el.customerId;
+      }
+    });
+    console.log(this.filteredInvoices, filteredCustomers);
   }
 
   onSearchClose() {
-
+    this.filteredInvoices = this.invoices;
   }
 
 }

@@ -71,9 +71,13 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   onSearchEnter(value) {
     console.log(value);
+    this.filteredProducts = this.products;
+    this.filteredProducts = this.filteredProducts.filter( el => {
+      return el.productName.toString().toLowerCase().indexOf(value.toLowerCase()) != -1 || el.productCode.toString().toLowerCase().indexOf(value.toLowerCase()) != -1;
+    });
   }
 
   onSearchClose() {
-
+    this.filteredProducts = this.products;
   }
 }

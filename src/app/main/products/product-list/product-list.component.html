@@ -4,14 +4,6 @@
       <h2 style="margin-top: 0px;">Products</h2>
     </div>
     <div class="col-md-4 col-xs-6">
-      <!-- <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for...">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button">
-            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-          </button>
-        </span>
-      </div> -->
       <app-search-filter [placeholder]="'Search...'" (onEnter)="onSearchEnter($event)" (onClose)="onSearchClose()"></app-search-filter>
     </div>
     <div class="col-md-4 col-xs-4">
