@@ -12,17 +12,12 @@ import { SharedModule } from './shared/shared.module';
 
 import { HeaderComponent } from './header/header.component';
 
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
-import { AlertComponent } from './shared/alert/alert.component';
-
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoadingSpinnerComponent,
-    AlertComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,11 +4,15 @@ import { CommonModule } from '@angular/common';
 import { GetNamePipe } from './getname.pipe';
 import { DropdownDirective } from './dropdown.directive';
 import { FormsModule } from '@angular/forms';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
 declarations: [
   GetNamePipe,
   DropdownDirective,
+  LoadingSpinnerComponent,
+  AlertComponent,
 ],
 imports: [
   CommonModule,
@@ -17,6 +21,8 @@ imports: [
 exports:[
   GetNamePipe,
   DropdownDirective,
+  LoadingSpinnerComponent,
+  AlertComponent,
   CommonModule,
 ],
 })
