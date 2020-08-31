@@ -35,3 +35,10 @@
                       color-stop(0.72, rgb(73,125,189)),
                       color-stop(0.86, rgb(28,58,148)));
  }
+
+
+@media screen and (max-width: 800px) {
+  .products-header {
+    min-inline-size: -webkit-fill-available;
+  }
+}

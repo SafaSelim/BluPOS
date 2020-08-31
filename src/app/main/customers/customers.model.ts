@@ -4,6 +4,7 @@ export class Customer {
   lastName: string;
   contact: string;
   address: string;
+  fullName: string;
 
   constructor(customer) {
     console.log("customerModel:constructor-->", customer);
@@ -12,5 +13,6 @@ export class Customer {
     this.lastName = customer.lastName || "";
     this.contact = customer.contact || "";
     this.address = customer.address || "";
+    this.fullName = customer.firstName + " " + customer.lastName || "";
   }
 }

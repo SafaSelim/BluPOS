@@ -6,8 +6,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 body{
   margin-top:70px;
 }
-@media(max-width: 768px){
+/* @media(max-width: 768px){
   body{
     margin-top:180px;
    }
+}
+ */
+
+ @import "~@ng-select/ng-select/themes/default.theme.css";
+ .ng-dropdown-panel .ng-dropdown-panel-items .ng-optgroup{
+  font-weight: bold;
+  color: #066ca4;
 }

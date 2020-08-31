@@ -28,7 +28,10 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     this.customers = this.dataStorageService.customers;
     console.log( this.customers);
     this.paymentTypes = [{ "id": 1, "name": "Cash" }, { "id": 2, "name": "Credit Card" },];
-
+    this.customers.map( el=> {
+      el.fullName = el.firstName + " " + el.lastName;
+      return el;
+    });
   }
 
   ngOnInit(): void {

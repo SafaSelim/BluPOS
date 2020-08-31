@@ -3,25 +3,38 @@
   <div class="row">
     <div class="col-xs-7 form-group">
       <label for="customerId">Customer</label>
-      <select class="form-control" ngModel id="customerId" name="customerId" required>
+      <!-- <select class="form-control" ngModel id="customerId" name="customerId" required>
         <option
           *ngFor="let customer of customers"
           [value]="customer.customerId"
         >
           {{ customer.firstName }} {{ customer.lastName }}</option
         >
-      </select>
+      </select> -->
+      <ng-select [items]="customers"
+          bindLabel="fullName"
+          bindValue="customerId"
+          ngModel id="customerId" name="customerId"
+          required>
+    </ng-select>
+
     </div>
       <div class="col-xs-7 form-group">
         <label for="paymentType">Payment Type</label>
-        <select class="form-control" ngModel id="paymentType" name="paymentType" required>
+        <!-- <select class="form-control" ngModel id="paymentType" name="paymentType" required>
           <option
             *ngFor="let paymentType of paymentTypes"
             [value]="paymentType.id"
           >
             {{ paymentType.name }}</option
           >
-        </select>
+        </select> -->
+        <ng-select [items]="paymentTypes"
+          bindLabel="name"
+          bindValue="id"
+          ngModel id="paymentType" name="paymentType"
+          required>
+    </ng-select>
       </div>
   </div>
   <div class="row">

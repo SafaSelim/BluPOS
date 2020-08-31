@@ -5,6 +5,9 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../products/products.service';
 import { Product } from '../../products/products.model';
+import { ProductCategories } from 'src/app/shared/shared.model';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { ItemsList } from '@ng-select/ng-select/lib/items-list';
 
 @Component({
   selector: 'app-sales-edit',
@@ -19,14 +22,18 @@ export class SalesEditComponent implements OnInit, OnDestroy {
   editedItem: Sales;
 
   products: Product[] = [];
+  productCategories: ProductCategories[] = [];
 
   price: number = 0;
 
   constructor(
     private salesService: SalesService,
     private productsService: ProductsService,
+    private dataStorageService: DataStorageService,
     ) {
       this.products = this.productsService.products;
+      this.productCategories = this.dataStorageService.productCategories;
+      this.groupByCategory = this.groupByCategory.bind(this);
      }
 
   ngOnInit(): void {
@@ -43,6 +50,7 @@ export class SalesEditComponent implements OnInit, OnDestroy {
 
       }
     );
+    this.productCategories = this.dataStorageService.productCategories;
   }
 
   onSubmit(form: NgForm) {
@@ -66,7 +74,7 @@ export class SalesEditComponent implements OnInit, OnDestroy {
     console.log(val);
     let tempProducts = this.products;
     tempProducts.forEach(el => {
-      if(el.productId == val) {
+      if(el.productId == val.productId) {
         this.price = el.price;
       }
     });
@@ -84,6 +92,17 @@ export class SalesEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  groupByCategory(item): string {
+    console.log('groupByCategory',item);
+    console.log('groupByCategory',this.productCategories);
+    for(let i = 0 ; i < this.productCategories.length; i++){
+      if(this.productCategories[i].productCatId == item.productCatId){
+        return this.productCategories[i].productCatName.toString();
+      }
+    }
+    return "";
   }
 
 }

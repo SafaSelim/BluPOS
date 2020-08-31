@@ -5,11 +5,23 @@
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="prodId">Product</label>
-          <select
+          <!-- <select
             class="form-control" ngModel id="prodId" name="prodId" required (change)="onProdChange($event.target.value)">
             <option *ngFor="let product of products" [value]="product.productId">
               {{ product.productName }}</option>
-          </select>
+          </select> -->
+          <ng-select [items]="products"
+                bindLabel="productName"
+                bindValue="productId"
+                [groupBy]="groupByCategory"
+                (change)="onProdChange($event)"
+                ngModel id="prodId" name="prodId"
+                required>
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                  <img height="40" width="40" [src]="item.imgPath"/>
+                  <b>{{item.productName}}</b>
+              </ng-template>
+        </ng-select>
         </div>
         <div class="col-sm-2 form-group">
           <label for="quantity">Quantity</label>
