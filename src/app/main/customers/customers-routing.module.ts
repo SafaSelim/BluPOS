@@ -6,12 +6,14 @@ import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
 import { CustomerStartComponent } from './customer-start/customer-start.component';
 import { AuthGuard } from 'src/app/auth/auth.guard';
+import { CustomersService } from './customers.service';
 
 
 const routes: Routes = [ {
   path: '',
     component: CustomersComponent,
     canActivate: [AuthGuard],
+    resolve: { data: CustomersService},
     children: [
     { path: '', component: CustomerStartComponent },
     { path: 'new', component: CustomerEditComponent },

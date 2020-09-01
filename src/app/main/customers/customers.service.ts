@@ -1,19 +1,59 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { apiURL } from '../../config/config';
 
 import { Customer } from './customers.model'
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class CustomersService {
   customersChanged = new Subject<Customer[]>();
 
-  private customers: Customer[] = [];
+  customers: Customer[] = [];
 
   constructor(
     private http: HttpClient,
   ) { }
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Customer[]> | Promise<Customer[]> | Customer[] {
+
+    console.log('RouterStateSnapshot ----> ', state);
+    console.log('ActivatedRouteSnapshot ----> ', route);
+
+    return new Promise((resolve, reject) => {
+      Promise.all([
+        this.getAllCustomers(),
+      ]).then(
+        () => {
+          console.log('resolve ----> ', state);
+          resolve();
+        },
+        reject
+      );
+    });
+  }
+
+  /**
+      * Get Customers
+      *
+      * @returns {Promise<any>}
+      */
+  getAllCustomers(): Promise<Customer[]> {
+    return new Promise((resolve, reject) => {
+      this.http.get('https://pos-system-ccbc8.firebaseio.com/customers.json')
+        .subscribe((customers: Customer[]) => {
+
+          console.log(customers);
+          this.setCustomers(customers);
+
+          this.customersChanged.next(this.customers.slice());
+          resolve(customers);
+        }, reject);
+    });
+
+  }
+
 
   getCustomers() {
     this.http.get('https://pos-system-ccbc8.firebaseio.com/customers.json').subscribe(

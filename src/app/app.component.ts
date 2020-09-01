@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     this.authService.autoLogin();
 
     if(this.userData){
-      this.dataStorageService.getScript();
+      this.dataStorageService.getDatas();
     }
 
   }

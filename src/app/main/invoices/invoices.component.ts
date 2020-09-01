@@ -39,8 +39,8 @@ export class InvoicesComponent implements OnInit {
       { "id": 2, "name": "Credit Card" },
     ];
     this.users = this.dataStorageService.users;
-    this.customers = this.dataStorageService.customers;
-    this.invoices = this.dataStorageService.invoices;
+    this.invoices = this.invoicesService.invoices;
+    this.customers = this.invoicesService.customers;
     this.filteredInvoices = this.invoices;
   }
 

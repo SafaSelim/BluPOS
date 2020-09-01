@@ -21,9 +21,6 @@ export class DataStorageService {
   productUnits: ProductUnits[] = [];
   productCategories: ProductCategories[] = [];
   users: Users[] = [];
-  customers: Customer[] = [];
-  invoices: Invoice[] = [];
-  sales: Sales[] = [];
 
   constructor(
     private http: HttpClient,
@@ -40,14 +37,11 @@ export class DataStorageService {
     );
   } */
 
-  getScript = async () => {
-    this.getProducts().then(data => this.products = data);
+  getDatas = async () => {
+    this.getProducts().then(data => this.products = data);// Move this to products service as a resolver.
     this.getProductUnits().then(data => this.productUnits = data);
     this.getProductCategories().then(data => this.productCategories = data);
     this.getUsers().then(data => this.users = data);
-    this.getCustomers().then(data => this.customers = data);
-    this.getInvoices().then(data => this.invoices = data);
-    this.getSales().then(data => this.sales = data);
   };
 
   /**
@@ -58,38 +52,6 @@ export class DataStorageService {
     private getProducts(): Promise<Product[]> {
       return this.http.get<Product[]>("https://pos-system-ccbc8.firebaseio.com/products.json").pipe(
           map(res => res.map(item => new Product(item)))
-      ).toPromise();
-  }
-
-  /**
-     * Get Invoices
-     *
-     * @returns {Promise<any>}
-     */
-    private getInvoices(): Promise<Invoice[]> {
-      return this.http.get<Invoice[]>("https://pos-system-ccbc8.firebaseio.com/invoices.json").pipe(
-          map(res => res.map(item => new Invoice(item)))
-      ).toPromise();
-  }
-  /**
-     * Get Sales
-     *
-     * @returns {Promise<any>}
-     */
-    private getSales(): Promise<Sales[]> {
-      return this.http.get<Sales[]>("https://pos-system-ccbc8.firebaseio.com/sales.json").pipe(
-          map(res => res.map(item => new Sales(item)))
-      ).toPromise();
-  }
-
-  /**
-     * Get Customers
-     *
-     * @returns {Promise<any>}
-     */
-    private getCustomers(): Promise<Customer[]> {
-      return this.http.get<Customer[]>("https://pos-system-ccbc8.firebaseio.com/customers.json").pipe(
-          map(res => res.map(item => new Customer(item)))
       ).toPromise();
   }
 

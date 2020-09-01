@@ -12,7 +12,7 @@ export class SalesService {
   salesChanged = new Subject<Sales[]>();
   startedEditing = new Subject<number>();
 
-  private sales: Sales[] = [];
+  sales: Sales[] = [];
 
   constructor(
     private http: HttpClient

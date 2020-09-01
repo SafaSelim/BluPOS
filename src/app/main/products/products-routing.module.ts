@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../../auth/auth.guard';
+import { ProductsService } from './products.service';
+
 
 import { ProductsComponent } from './products.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
@@ -14,7 +16,10 @@ const routes: Routes = [{
   component: ProductsComponent,
   canActivate: [AuthGuard],
   children: [
-    { path: '', component: ProductListComponent },
+    {
+      path: '', component: ProductListComponent,
+      resolve: { data: ProductsService }
+    },
     { path: 'new', component: ProductEditComponent },
     { path: ':id', component: ProductDetailComponent },
     { path: ':id/edit', component: ProductEditComponent },

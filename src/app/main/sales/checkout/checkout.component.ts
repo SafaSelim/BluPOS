@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { CheckoutService } from './checkout.service';
 import { Customer } from '../../customers/customers.model'
 import { DataStorageService } from 'src/app/shared/data-storage.service';
+import { CustomersService } from '../../customers/customers.service';
 
 @Component({
   selector: 'app-checkout',
@@ -23,9 +24,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   constructor(
     private checkoutService: CheckoutService,
-    private dataStorageService: DataStorageService,
   ) {
-    this.customers = this.dataStorageService.customers;
+    this.customers = this.checkoutService.customers;
     console.log( this.customers);
     this.paymentTypes = [{ "id": 1, "name": "Cash" }, { "id": 2, "name": "Credit Card" },];
     this.customers.map( el=> {
