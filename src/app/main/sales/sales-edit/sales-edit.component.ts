@@ -3,11 +3,8 @@ import { Sales } from '../sales.model';
 import { SalesService } from '../sales.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { ProductsService } from '../../products/products.service';
 import { Product } from '../../products/products.model';
 import { ProductCategories } from 'src/app/shared/shared.model';
-import { DataStorageService } from 'src/app/shared/data-storage.service';
-import { ItemsList } from '@ng-select/ng-select/lib/items-list';
 
 @Component({
   selector: 'app-sales-edit',
@@ -28,11 +25,9 @@ export class SalesEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private salesService: SalesService,
-    private productsService: ProductsService,
-    private dataStorageService: DataStorageService,
     ) {
-      this.products = this.productsService.products;
-      this.productCategories = this.dataStorageService.productCategories;
+      this.products = this.salesService.products;
+      this.productCategories = this.salesService.productCategories;
       this.groupByCategory = this.groupByCategory.bind(this);
      }
 
@@ -50,7 +45,7 @@ export class SalesEditComponent implements OnInit, OnDestroy {
 
       }
     );
-    this.productCategories = this.dataStorageService.productCategories;
+    this.productCategories = this.salesService.productCategories;
   }
 
   onSubmit(form: NgForm) {

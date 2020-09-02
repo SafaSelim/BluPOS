@@ -20,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let invoice of filteredInvoices; let i = index">
+      <ng-container *ngFor="let invoice of filteredInvoices | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize; let i = index">
         <tr style="cursor: pointer" (click)="current = current == i ? -1 : i">
           <th scope="row">{{ invoice.invoiceId }}</th>
           <td>

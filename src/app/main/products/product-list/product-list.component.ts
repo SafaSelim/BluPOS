@@ -26,9 +26,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private productsService: ProductsService,
     private router: Router,
     private route: ActivatedRoute,
-    private dataStorageService: DataStorageService,
   ) {
-    this.productCategories = this.dataStorageService.productCategories;
+    this.productCategories = this.productsService.productCategories;
    }
 
   ngOnInit(): void {
