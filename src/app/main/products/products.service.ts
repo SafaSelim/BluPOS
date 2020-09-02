@@ -142,7 +142,8 @@ export class ProductsService {
         console.log('ProductsService:updateProducts:response-->', response);
       }
     );
-    this.productsChanged.next(this.products.slice());
+    // this.productsChanged.next(this.products.slice());
+    this.getAllProducts();
   }
 
   deleteProduct(productId: number) {
@@ -160,7 +161,8 @@ export class ProductsService {
       }
     );
     // this.products.splice(index, 1);
-    this.productsChanged.next(this.products.slice());
+    // this.productsChanged.next(this.products.slice());
+    this.getAllProducts();
   }
 
 }
