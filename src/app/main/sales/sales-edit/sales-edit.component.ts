@@ -1,10 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Sales } from '../sales.model';
 import { SalesService } from '../sales.service';
-import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { Product } from '../../products/products.model';
 import { ProductCategories } from 'src/app/shared/shared.model';
+
+import * as SalesActions from '../store/sales.actions';
 
 @Component({
   selector: 'app-sales-edit',
@@ -25,6 +28,7 @@ export class SalesEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private salesService: SalesService,
+    private store: Store<{sales: {sales: Sales[]}}>,
     ) {
       this.products = this.salesService.products;
       this.productCategories = this.salesService.productCategories;
@@ -59,7 +63,8 @@ export class SalesEditComponent implements OnInit, OnDestroy {
     if (this.editMode) {
       this.salesService.updateSale(this.editedItemIndex, newSale)
     } else {
-      this.salesService.addSales(newSale);
+      // this.salesService.addSales(newSale);
+      this.store.dispatch(new SalesActions.SalesAdded(newSale));
     }
     this.editMode = false;
     form.reset();

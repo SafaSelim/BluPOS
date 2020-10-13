@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
-
+import { Store } from '@ngrx/store';
 
 import { Sales } from './sales.model';
 import { SalesService } from './sales.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Product } from '../products/products.model';
 import { ProductsService } from '../products/products.service';
 
@@ -14,6 +14,7 @@ import { ProductsService } from '../products/products.service';
 })
 export class SalesComponent implements OnInit, OnDestroy {
   sales: Sales[] = [];
+  sales_new: Observable<{sales: Sales[]}>;
   salesChangeSub: Subscription;
   products: Product[] = [];
   totalAmount: number = 0;
@@ -23,6 +24,7 @@ export class SalesComponent implements OnInit, OnDestroy {
   constructor(
     private salesService: SalesService,
     private productsService: ProductsService,
+    private store: Store<{sales: {sales: Sales[]}}>,
   ) {
     this.products = this.productsService.getProducts();
     this.sales = this.salesService.getSales();
@@ -31,6 +33,8 @@ export class SalesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.sales_new  = this.store.select('sales');
+
     this.sales = this.salesService.getSales();
     this.salesChangeSub = this.salesService.salesChanged.subscribe(
       (sales: Sales[]) => {

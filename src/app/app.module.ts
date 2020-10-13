@@ -8,11 +8,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
+import { StoreModule } from '@ngrx/store';
+
 import { SharedModule } from './shared/shared.module';
 
 import { HeaderComponent } from './header/header.component';
 
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+
+import { salesReducer } from './main/sales/store/sales.reducer';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,8 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
     AppRoutingModule,
     NoopAnimationsModule,
     HttpClientModule,
+
+    StoreModule.forRoot({sales: salesReducer}),
 
     SharedModule,
   ],

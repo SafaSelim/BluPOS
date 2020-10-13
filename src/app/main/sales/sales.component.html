@@ -18,7 +18,7 @@
           <tbody>
             <tr
               style="cursor: pointer;"
-              *ngFor="let sale of sales; let i = index"
+              *ngFor="let sale of (sales_new | async).sales ; let i = index"
               (click)="onEditProductItem(sale.productId)"
             >
               <th scope="row">{{ i + 1 }}</th>
@@ -31,7 +31,7 @@
               <td>{{ sale.quantity }}</td>
               <td>{{ sale.quantity * sale.price | currency }}</td>
             </tr>
-            <tr *ngIf="sales?.length != 0">
+            <tr *ngIf="(sales_new | async).sales?.length != 0">
               <th></th>
               <th></th>
               <th></th>
