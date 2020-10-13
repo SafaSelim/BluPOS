@@ -1,5 +1,6 @@
 import { Product } from './products.model';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { SalesService } from '../sales/sales.service';
 import { Subject, Observable } from 'rxjs';
 import { apiURL } from '../../config/config';
@@ -7,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ProductCategories } from 'src/app/shared/shared.model';
+import { Sales } from '../sales/sales.model';
+
+import * as SalesActions from '../sales/store/sales.actions';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
@@ -18,6 +22,7 @@ export class ProductsService {
   constructor(
     private salesService: SalesService,
     private http: HttpClient,
+    private store: Store<{sales: {sales: Sales[]}}>,
   ) { }
 
 
@@ -113,7 +118,18 @@ export class ProductsService {
 
   addProductsToSales(product: Product) {
     console.log('addProductsToSales', product);
-    this.salesService.addProducts(product);
+    let sales: Sales = {
+      salesId: null,
+      userId: null,
+      invoiceId: null,
+      productId: product.productId,
+      quantity: 1,
+      price: product.price,
+      subTotal: product.price,
+    };
+
+    this.store.dispatch(new SalesActions.ProductAdded(sales))
+    // this.salesService.addProducts(product);
   }
 
   addProduct(product: Product) {
