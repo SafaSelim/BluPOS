@@ -11,6 +11,7 @@ import { ProductCategories } from 'src/app/shared/shared.model';
 import { Sales } from '../sales/sales.model';
 
 import * as SalesActions from '../sales/store/sales.actions';
+import * as fromSales from '../sales/store/sales.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
@@ -22,7 +23,7 @@ export class ProductsService {
   constructor(
     private salesService: SalesService,
     private http: HttpClient,
-    private store: Store<{sales: {sales: Sales[]}}>,
+    private store: Store<fromSales.AppState>,
   ) { }
 
 

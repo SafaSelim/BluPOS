@@ -7,6 +7,9 @@ import { Observable, Subscription } from 'rxjs';
 import { Product } from '../products/products.model';
 import { ProductsService } from '../products/products.service';
 
+import * as fromSales from '../sales/store/sales.reducer';
+import * as salesActions from '../sales/store/sales.actions';
+
 @Component({
   selector: 'app-sales',
   templateUrl: './sales.component.html',
@@ -14,7 +17,7 @@ import { ProductsService } from '../products/products.service';
 })
 export class SalesComponent implements OnInit, OnDestroy {
   sales: Sales[] = [];
-  sales_new: Observable<{sales: Sales[]}>;
+  sales_new: Observable<{ sales: Sales[] }>;
   salesChangeSub: Subscription;
   products: Product[] = [];
   totalAmount: number = 0;
@@ -24,7 +27,7 @@ export class SalesComponent implements OnInit, OnDestroy {
   constructor(
     private salesService: SalesService,
     private productsService: ProductsService,
-    private store: Store<{sales: {sales: Sales[]}}>,
+    private store: Store<fromSales.AppState>,
   ) {
     this.products = this.productsService.getProducts();
     this.sales = this.salesService.getSales();
@@ -33,7 +36,7 @@ export class SalesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.sales_new  = this.store.select('sales');
+    this.sales_new = this.store.select('sales');
 
     this.sales = this.salesService.getSales();
     this.salesChangeSub = this.salesService.salesChanged.subscribe(
@@ -63,7 +66,8 @@ export class SalesComponent implements OnInit, OnDestroy {
   }
 
   onEditProductItem(index: number) {
-    this.salesService.startedEditing.next(index);
+    // this.salesService.startedEditing.next(index);
+    this.store.dispatch(new salesActions.EditingStarted(index));
   }
 
 }

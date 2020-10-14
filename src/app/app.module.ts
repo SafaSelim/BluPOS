@@ -10,6 +10,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StoreModule } from '@ngrx/store';
 
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+
 import { SharedModule } from './shared/shared.module';
 
 import { HeaderComponent } from './header/header.component';
@@ -17,6 +19,8 @@ import { HeaderComponent } from './header/header.component';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
 import { salesReducer } from './main/sales/store/sales.reducer';
+
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,8 @@ import { salesReducer } from './main/sales/store/sales.reducer';
     NoopAnimationsModule,
     HttpClientModule,
 
-    StoreModule.forRoot({sales: salesReducer}),
+    StoreModule.forRoot({ sales: salesReducer }),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
 
     SharedModule,
   ],
