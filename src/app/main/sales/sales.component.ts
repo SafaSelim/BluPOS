@@ -29,7 +29,7 @@ export class SalesComponent implements OnInit, OnDestroy {
     private productsService: ProductsService,
     private store: Store<fromSales.AppState>,
   ) {
-    this.products = this.productsService.getProducts();
+    this.products = this.salesService.products;
     this.sales = this.salesService.getSales();
     this.totalAmount = this.calculateTotalAmount(this.sales);
     this.taxAmount = this.totalAmount * (18 / 100);
@@ -38,18 +38,23 @@ export class SalesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sales_new = this.store.select('sales');
 
-    this.sales = this.salesService.getSales();
+    this.salesChangeSub = this.sales_new.subscribe(el=> {
+      this.totalAmount = this.calculateTotalAmount(el.sales);
+      this.taxAmount = this.totalAmount * (18 / 100);
+    })
+
+  /*   this.sales = this.salesService.getSales();
     this.salesChangeSub = this.salesService.salesChanged.subscribe(
       (sales: Sales[]) => {
         this.sales = sales;
         console.log(this.sales);
         /*this.sales = this.sales.filter(el => {
           return el.invoiceId == null || el.invoiceId == undefined;
-        }) */
+        }) *
         this.totalAmount = this.calculateTotalAmount(this.sales);
         this.taxAmount = this.totalAmount * (18 / 100);
       }
-    );
+    ); */
 
   }
 

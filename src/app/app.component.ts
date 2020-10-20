@@ -10,6 +10,9 @@ import { DataStorageService } from './shared/data-storage.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  /**
+   * Application main title
+   */
   title = 'blupos';
 
   userData;
@@ -17,13 +20,13 @@ export class AppComponent implements OnInit {
     private authService: AuthService,
     private dataStorageService: DataStorageService,
   ) {
-    this.userData =  JSON.parse(localStorage.getItem('userData'));
+    this.userData = JSON.parse(localStorage.getItem('userData'));
   }
 
   ngOnInit() {
     this.authService.autoLogin();
 
-    if(this.userData){
+    if (this.userData) {
       this.dataStorageService.getDatas();
     }
 

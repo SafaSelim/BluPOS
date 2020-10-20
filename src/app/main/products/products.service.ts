@@ -129,7 +129,7 @@ export class ProductsService {
       subTotal: product.price,
     };
 
-    this.store.dispatch(new SalesActions.ProductAdded(sales))
+    this.store.dispatch(new SalesActions.SalesAdded(sales))
     // this.salesService.addProducts(product);
   }
 

@@ -49,3 +49,6 @@ Thumbs.db
 /.firebase
 .firebaserc
 firebase.json
+
+# Compodoc Files
+/documentation

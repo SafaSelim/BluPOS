@@ -5,7 +5,14 @@ import { DataStorageService } from '../shared/data-storage.service';
 import { AuthService } from '../auth/auth.service';
 import { SalesService } from '../main/sales/sales.service';
 import { take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
+
+import * as fromSales from '../main/sales/store/sales.reducer';
+
+/**
+ * The header component
+ */
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -24,6 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private dataStorageService: DataStorageService,
     private authService: AuthService,
     private salesService: SalesService,
+    private store: Store<fromSales.AppState>,
   ) {
 
    }
@@ -36,8 +44,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       });
 
 
-      this.saleSub = this.salesService.salesChanged.subscribe(saleItem => {
+    /*   this.saleSub = this.salesService.salesChanged.subscribe(saleItem => {
         this.currentItemOnBasket = saleItem.length;
+      }); */
+      this.saleSub = this.store.select('sales').subscribe(el => {
+        this.currentItemOnBasket = el.sales.length;
       });
     }
 
@@ -50,6 +61,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.dataStorageService.fetchProducts().subscribe();
   }
 
+  /**
+   * Logout Method
+   */
   onLogout() {
     this.authService.logout();
   }

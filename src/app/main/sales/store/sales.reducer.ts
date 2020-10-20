@@ -26,16 +26,30 @@ export function salesReducer(
 ) {
   switch (action.type) {
     case SalesActions.SALES_ADDED:
-      //IF the sales contains the same product id just combine the quantity
+      const array = [...state.sales, action.payload];
+
+      var result = [];
+      array.reduce((res, val) => {
+        if (!res[val.productId]) {
+          res[val.productId] = {
+            salesId: val.salesId,
+            userId: val.userId,
+            invoiceId: val.invoiceId,
+            productId: val.productId,
+            quantity: 0,
+            price: val.price,
+            subTotal: val.subTotal,
+          };
+          result.push(res[val.productId]);
+        }
+        res[val.productId].quantity += val.quantity;
+        res[val.productId].subTotal = res[val.productId].quantity * val.price;
+        return res;
+      }, {});
+
       return {
         ...state,
-        sales: [...state.sales, action.payload]
-      };
-    case SalesActions.PRODUCT_ADDED:
-      // need to make it one because its same with salesadded action
-      return {
-        ...state,
-        sales: [...state.sales, action.payload]
+        sales: [...result]
       };
     case SalesActions.SALES_UPDATED:
       const sale = state.sales[state.editedSaleIndex];
