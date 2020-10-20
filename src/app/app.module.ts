@@ -18,7 +18,7 @@ import { HeaderComponent } from './header/header.component';
 
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
 
-import { salesReducer } from './main/sales/store/sales.reducer';
+import * as fromApp from './store/app.reducer';
 
 import { environment } from 'src/environments/environment';
 
@@ -33,7 +33,7 @@ import { environment } from 'src/environments/environment';
     NoopAnimationsModule,
     HttpClientModule,
 
-    StoreModule.forRoot({ sales: salesReducer }),
+    StoreModule.forRoot(fromApp.appReducer),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
 
     SharedModule,

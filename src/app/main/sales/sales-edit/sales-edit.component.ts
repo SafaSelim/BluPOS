@@ -8,7 +8,7 @@ import { Product } from '../../products/products.model';
 import { ProductCategories } from 'src/app/shared/shared.model';
 
 import * as SalesActions from '../store/sales.actions';
-import * as fromSales from '../store/sales.reducer';
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-sales-edit',
@@ -28,7 +28,7 @@ export class SalesEditComponent implements OnInit, OnDestroy {
 
   constructor(
     private salesService: SalesService,
-    private store: Store<fromSales.AppState>,
+    private store: Store<fromApp.AppState>,
   ) {
     this.products = this.salesService.products;
     this.productCategories = this.salesService.productCategories;

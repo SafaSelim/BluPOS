@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 
-import * as fromSales from '../main/sales/store/sales.reducer';
+import * as fromApp from '../store/app.reducer';
 
 /**
  * The header component
@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private dataStorageService: DataStorageService,
     private authService: AuthService,
     private salesService: SalesService,
-    private store: Store<fromSales.AppState>,
+    private store: Store<fromApp.AppState>,
   ) {
 
    }

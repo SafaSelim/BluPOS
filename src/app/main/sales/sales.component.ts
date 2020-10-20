@@ -7,8 +7,8 @@ import { Observable, Subscription } from 'rxjs';
 import { Product } from '../products/products.model';
 import { ProductsService } from '../products/products.service';
 
-import * as fromSales from '../sales/store/sales.reducer';
 import * as salesActions from '../sales/store/sales.actions';
+import * as fromApp from '../../store/app.reducer';
 
 @Component({
   selector: 'app-sales',
@@ -27,7 +27,7 @@ export class SalesComponent implements OnInit, OnDestroy {
   constructor(
     private salesService: SalesService,
     private productsService: ProductsService,
-    private store: Store<fromSales.AppState>,
+    private store: Store<fromApp.AppState>,
   ) {
     this.products = this.salesService.products;
     this.sales = this.salesService.getSales();

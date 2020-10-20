@@ -6,13 +6,10 @@ import * as SalesActions from './sales.actions';
 
 export interface State {
   sales: Sales[];
-  editedSale: Sales;
+  editedSale: Sales[];
   editedSaleIndex: number;
 }
 
-export interface AppState {
-  sales: State;
-}
 
 const initialState: State = {
   sales: [],
@@ -23,7 +20,7 @@ const initialState: State = {
 export function salesReducer(
   state: State = initialState,
   action: SalesActions.SalesActions
-) {
+): State {
   switch (action.type) {
     case SalesActions.SALES_ADDED:
       const array = [...state.sales, action.payload];
@@ -56,7 +53,6 @@ export function salesReducer(
       const updatedSale = {
         ...sale,
         ...action.payload
-
       }
       const updatedSales = [...state.sales];
       updatedSales[state.editedSaleIndex] = updatedSale;
