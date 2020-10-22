@@ -8,7 +8,7 @@ export interface AppState {
   auth: fromAuth.State;
 };
 
-export const appReducer: ActionReducerMap<AppState> = {
+export const appReducer: ActionReducerMap<any> = {
   sales: fromSales.salesReducer,
   auth: fromAuth.authReducer
 };

@@ -6,7 +6,7 @@ import * as SalesActions from './sales.actions';
 
 export interface State {
   sales: Sales[];
-  editedSale: Sales[];
+  editedSale: Sales;
   editedSaleIndex: number;
 }
 
@@ -17,10 +17,11 @@ const initialState: State = {
   editedSaleIndex: -1
 }
 
+
 export function salesReducer(
   state: State = initialState,
   action: SalesActions.SalesActions
-): State {
+) {
   switch (action.type) {
     case SalesActions.SALES_ADDED:
       const array = [...state.sales, action.payload];
@@ -55,7 +56,11 @@ export function salesReducer(
         ...action.payload
       }
       const updatedSales = [...state.sales];
-      updatedSales[state.editedSaleIndex] = updatedSale;
+      for (let i = 0; i < updatedSales.length; i++) {
+        if( updatedSales[i].productId == state.editedSaleIndex) {
+          updatedSales[i] = updatedSale;
+        }
+      }
       return {
         ...state,
         sales: updatedSales,
@@ -74,9 +79,11 @@ export function salesReducer(
     case SalesActions.EDITING_STARTED:
       return {
         ...state,
-        editedSale: { ...state.sales.filter(sale => {
-          return sale.productId === action.payload;
-        }) },
+        editedSale: {
+          ...state.sales.filter(sale => {
+            return sale.productId === action.payload;
+          })
+        },
         editedSaleIndex: action.payload
       };
     case SalesActions.EDITING_STOPPED:
@@ -88,4 +95,6 @@ export function salesReducer(
     default:
       return state;
   }
+
 }
+
