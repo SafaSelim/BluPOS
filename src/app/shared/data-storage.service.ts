@@ -10,7 +10,8 @@ import { ProductUnits, ProductCategories, Users } from './shared.model';
 import { Customer } from '../main/customers/customers.model';
 import { Invoice } from '../main/invoices/invoices.model';
 import { Sales } from '../main/sales/sales.model';
-
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/app.reducer';
 @Injectable(
   { providedIn: 'root' }
 )
@@ -26,6 +27,7 @@ export class DataStorageService {
     private http: HttpClient,
     private productsService: ProductsService,
     private authService: AuthService,
+    private store: Store<fromApp.AppState>,
   ) { }
 
   /* storeProducts() {
@@ -100,8 +102,10 @@ export class DataStorageService {
   }
 
   fetchProducts() {
-    return this.authService.user.pipe(
+    // return this.authService.user.pipe(
+    return this.store.select('auth').pipe(
       take(1),
+      map(authState => authState.user),
       exhaustMap(user => {
         return this.http.get<Product[]>('https://pos-system-ccbc8.firebaseio.com/products.json')
           .pipe(
