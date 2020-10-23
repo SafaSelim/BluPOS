@@ -7,6 +7,10 @@ import { Subscription } from 'rxjs';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { ProductCategories } from 'src/app/shared/shared.model';
 
+import * as fromApp from '../../../store/app.reducer';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -26,19 +30,22 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private productsService: ProductsService,
     private router: Router,
     private route: ActivatedRoute,
+    private store: Store<fromApp.AppState>,
   ) {
     this.productCategories = this.productsService.productCategories;
-   }
+  }
 
   ngOnInit(): void {
-    this.subscription = this.productsService.productsChanged.subscribe(
-      (products: Product[]) => {
-        this.products = products;
-      }
-    )
-    this.products = this.productsService.getProducts();
+    this.subscription = this.store.select('products')
+      .pipe(map(productsState => productsState.products))
+      .subscribe(
+        (products: Product[]) => {
+          this.products = products;
+        }
+      )
+    // this.products = this.productsService.getProducts();
     this.filteredProducts = this.products;
-    console.log("ProductListComponent",this.products);
+    console.log("ProductListComponent", this.products);
   }
 
   ngOnDestroy() {
@@ -53,7 +60,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this.filteredProducts = this.products;
     this.categoryName = categoryName || "";
     this.clickedCat = 0;
-    if(categoryId != 0){
+    if (categoryId != 0) {
       this.filteredProducts = this.filteredProducts.filter(el => {
         this.clickedCat = categoryId;
         return el.productCatId == categoryId;
@@ -71,7 +78,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   onSearchEnter(value) {
     console.log(value);
     this.filteredProducts = this.products;
-    this.filteredProducts = this.filteredProducts.filter( el => {
+    this.filteredProducts = this.filteredProducts.filter(el => {
       return el.productName.toString().toLowerCase().indexOf(value.toLowerCase()) != -1 || el.productCode.toString().toLowerCase().indexOf(value.toLowerCase()) != -1;
     });
   }
