@@ -7,8 +7,8 @@ import { SalesService } from '../main/sales/sales.service';
 import { map, take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-
 import * as fromApp from '../store/app.reducer';
+import * as AuthActions from '../auth/store/auth.actions';
 
 /**
  * The header component
@@ -68,7 +68,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
    * Logout Method
    */
   onLogout() {
-    this.authService.logout();
+    // this.authService.logout();
+    this.store.dispatch(new AuthActions.Logout());
   }
 
   ngOnDestroy() {
