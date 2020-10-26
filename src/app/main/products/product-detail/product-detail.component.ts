@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { map, switchMap } from 'rxjs/operators';
 import { Product } from '../products.model';
 import { ProductsService } from '../products.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+
+
+import * as fromApp from '../../../store/app.reducer';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,15 +21,29 @@ export class ProductDetailComponent implements OnInit {
     private productsService: ProductsService,
     private route: ActivatedRoute,
     private router: Router,
+    private store: Store<fromApp.AppState>,
   ) { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.id = +params['id'];
-        this.product = this.productsService.getProduct(this.id);
-      }
-    )
+    this.route.params
+      .pipe(
+        map(params => {
+          return +params['id'];
+        }),
+        switchMap(id => {
+          this.id = id;
+          return this.store.select('products');
+        }),
+        map(productsState => {
+          return productsState.products.find((product, index) => {
+            return product.productId == this.id;
+          });
+        }
+        )
+      )
+      .subscribe(product => {
+        this.product = product;
+      });
   }
 
   onAddToSales() {

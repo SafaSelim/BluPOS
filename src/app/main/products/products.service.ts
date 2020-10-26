@@ -13,6 +13,8 @@ import { Sales } from '../sales/sales.model';
 import * as SalesActions from '../sales/store/sales.actions';
 import * as fromApp from '../../store/app.reducer';
 
+import * as ProductsActions from '../products/store/product.actions';
+
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
   productsChanged = new Subject<Product[]>();
@@ -59,9 +61,10 @@ export class ProductsService {
         .subscribe((products: Product[]) => {
 
           console.log(products);
-          this.setProducts(products);
+          // this.setProducts(products);
+          this.store.dispatch(new ProductsActions.SetProducts(products))
 
-          resolve(products);
+          resolve(products) ;
         }, reject);
     });
 
@@ -88,7 +91,7 @@ export class ProductsService {
   }
 
 
-  getProducts() {
+/*   getProducts() {
     this.http.get("https://pos-system-ccbc8.firebaseio.com/products.json").subscribe(
       (products: Product[]) => {
         console.log(products);
@@ -96,18 +99,18 @@ export class ProductsService {
       }
     )
     return this.products.slice();
-  }
+  } */
 
 
 
-  setProducts(products: Product[]) {
+ /*  setProducts(products: Product[]) {
     console.log("setProducts--->", products)
     this.products = [];
     for (let i = 0; i < products.length; i++) {
       this.products.push(new Product(products[i]));
     }
     this.productsChanged.next(this.products.slice());
-  }
+  } */
 
   getProduct(productId: number): Product {
     let product: Product[] = this.products;

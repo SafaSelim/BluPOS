@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/store/auth.effects';
+import { ProductsEffects } from './main/products/store/product.effects';
 import * as fromApp from './store/app.reducer';
 
 import { AppComponent } from './app.component';
@@ -30,7 +31,7 @@ import { HeaderComponent } from './header/header.component';
     StoreModule.forRoot(fromApp.appReducer),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
 
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ProductsEffects]),
 
     SharedModule,
   ],

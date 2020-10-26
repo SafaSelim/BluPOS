@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from '../auth/store/auth.actions';
 
+import * as ProductsActions from '../main/products/store/product.actions';
 /**
  * The header component
  */
@@ -29,8 +30,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataStorageService: DataStorageService,
-    private authService: AuthService,
-    private salesService: SalesService,
     private store: Store<fromApp.AppState>,
   ) {
 
@@ -61,7 +60,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onFetchData() {
-    this.dataStorageService.fetchProducts().subscribe();
+    // this.dataStorageService.fetchProducts().subscribe();
+    this.store.dispatch(new ProductsActions.FetchProducts());
   }
 
   /**

@@ -3,10 +3,13 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from '../products.service';
 import { Product } from '../products.model';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { ProductUnits, ProductCategories } from 'src/app/shared/shared.model';
 
+
+import * as fromApp from '../../../store/app.reducer';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-product-edit',
@@ -28,6 +31,7 @@ export class ProductEditComponent implements OnInit {
     private productsService: ProductsService,
     private dataStorageService: DataStorageService,
     private router: Router,
+    private store: Store<fromApp.AppState>,
   ) {
     this.productUnits = this.dataStorageService.productUnits;
     this.productCategories = this.dataStorageService.productCategories;
@@ -42,7 +46,10 @@ export class ProductEditComponent implements OnInit {
         console.log(this.editMode);
       });
 
-      this.products = this.productsService.getProducts();
+      this.store.select('products').pipe(take(1)).subscribe(productsState => {
+        this.products = productsState.products;
+      })
+    // this.products = this.productsService.getProducts();
 
   }
 
@@ -52,18 +59,18 @@ export class ProductEditComponent implements OnInit {
     prodId = this.products.length + 1;
     const newProduct = new Product({
       'productId': this.editMode ? this.id : prodId,
-      'productName' : this.productForm.value['prodName'],
-      'imgPath' : this.productForm.value['imgPath'],
-      'productCode' : this.productForm.value['prodCode'],
-      'productCatId' : this.productForm.value['prodCatId'],
-      'unitInStock' : this.productForm.value['unitInStock'],
-      'uom' : this.productForm.value['uom'],
-      'price' : this.productForm.value['price'],
+      'productName': this.productForm.value['prodName'],
+      'imgPath': this.productForm.value['imgPath'],
+      'productCode': this.productForm.value['prodCode'],
+      'productCatId': this.productForm.value['prodCatId'],
+      'unitInStock': this.productForm.value['unitInStock'],
+      'uom': this.productForm.value['uom'],
+      'price': this.productForm.value['price'],
     });
-    console.log("newProduct",newProduct);
+    console.log("newProduct", newProduct);
     if (this.editMode) {
       this.productsService.updateProduct(this.id, newProduct);
-    }else {
+    } else {
       this.productsService.addProduct(newProduct);
     }
 
@@ -80,14 +87,22 @@ export class ProductEditComponent implements OnInit {
     let unitInStock = null;
 
     if (this.editMode) {
-      const product = this.productsService.getProduct(this.id);
-      prodName = product.productName;
-      imgPath = product.imgPath;
-      prodCode = product.productCode;
-      prodCatId = product.productCatId;
-      price = product.price;
-      uom = product.uom;
-      unitInStock = product.unitInStock;
+      // const product = this.productsService.getProduct(this.id);
+      this.store.select('products').pipe(
+        map(productsState => {
+          return productsState.products.find((product) => {
+            return product.productId === this.id;
+          })
+        })
+      ).subscribe(product => {
+        prodName = product.productName;
+        imgPath = product.imgPath;
+        prodCode = product.productCode;
+        prodCatId = product.productCatId;
+        price = product.price;
+        uom = product.uom;
+        unitInStock = product.unitInStock;
+      });
     }
 
     this.productForm = new FormGroup({
@@ -101,8 +116,8 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
-  onCancel(){
-    this.router.navigate(['../'], {relativeTo: this.route});
+  onCancel() {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
 }
