@@ -86,11 +86,9 @@ export class SalesEditComponent implements OnInit, OnDestroy {
     });
     if (this.editMode) {
       // this.salesService.updateSale(this.editedItemIndex, newSale);
-      console.log("UPDATED SALE:",newSale)
       this.store.dispatch(new SalesActions.SalesUpdated(newSale))
     } else {
       // this.salesService.addSales(newSale);
-      console.log("UPDATED SALE:",newSale)
       this.store.dispatch(new SalesActions.SalesAdded(newSale));
     }
     this.editMode = false;
