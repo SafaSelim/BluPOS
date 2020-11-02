@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ProductsService } from '../products.service';
 import { Product } from '../products.model';
 import { map, take } from 'rxjs/operators';
@@ -8,15 +9,16 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { ProductUnits, ProductCategories } from 'src/app/shared/shared.model';
 
 
-import * as fromApp from '../../../store/app.reducer';
 import { Store } from '@ngrx/store';
+import * as fromApp from '../../../store/app.reducer';
+import * as ProductsActions from '../store/product.actions';
 
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.scss']
 })
-export class ProductEditComponent implements OnInit {
+export class ProductEditComponent implements OnInit,OnDestroy {
   id: number;
   editMode: boolean = false;
   productForm: FormGroup;
@@ -26,9 +28,10 @@ export class ProductEditComponent implements OnInit {
 
   products: Product[] = [];
 
+  storeSub: Subscription;
+
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService,
     private dataStorageService: DataStorageService,
     private router: Router,
     private store: Store<fromApp.AppState>,
@@ -49,7 +52,6 @@ export class ProductEditComponent implements OnInit {
       this.store.select('products').pipe(take(1)).subscribe(productsState => {
         this.products = productsState.products;
       })
-    // this.products = this.productsService.getProducts();
 
   }
 
@@ -69,9 +71,9 @@ export class ProductEditComponent implements OnInit {
     });
     console.log("newProduct", newProduct);
     if (this.editMode) {
-      this.productsService.updateProduct(this.id, newProduct);
+      this.store.dispatch(new ProductsActions.ProductUpdated({productId: this.id, newProduct}));
     } else {
-      this.productsService.addProduct(newProduct);
+      this.store.dispatch(new ProductsActions.ProductAdded(newProduct));
     }
 
     this.onCancel();
@@ -87,8 +89,7 @@ export class ProductEditComponent implements OnInit {
     let unitInStock = null;
 
     if (this.editMode) {
-      // const product = this.productsService.getProduct(this.id);
-      this.store.select('products').pipe(
+      this.storeSub = this.store.select('products').pipe(
         map(productsState => {
           return productsState.products.find((product) => {
             return product.productId === this.id;
@@ -118,6 +119,12 @@ export class ProductEditComponent implements OnInit {
 
   onCancel() {
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+
+  ngOnDestroy() {
+    if(this.storeSub){
+      this.storeSub.unsubscribe();
+    }
   }
 
 }

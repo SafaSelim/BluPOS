@@ -23,7 +23,6 @@ export class ProductsService {
   productCategories: ProductCategories[] = [];
 
   constructor(
-    private salesService: SalesService,
     private http: HttpClient,
     private store: Store<fromApp.AppState>,
   ) { }
@@ -136,7 +135,7 @@ export class ProductsService {
     // this.salesService.addProducts(product);
   }
 
-  addProduct(product: Product) {
+  /* addProduct(product: Product) {
     this.products.push(product);
     this.productsChanged.next(this.products.slice());
     const body = this.products;
@@ -146,9 +145,9 @@ export class ProductsService {
         console.log('ProductsService:addProduct:response-->', response);
       }
     );
-  }
+  } */
 
-  updateProduct(productId: number, newProduct: Product) {
+ /*  updateProduct(productId: number, newProduct: Product) {
     for (let i = 0; i < this.products.length; i++) {
       if (this.products[i].productId == productId) {
         this.products[i] = newProduct;
@@ -164,9 +163,9 @@ export class ProductsService {
     );
     // this.productsChanged.next(this.products.slice());
     this.getAllProducts();
-  }
+  } */
 
-  deleteProduct(productId: number) {
+  /* deleteProduct(productId: number) {
     for (let i = 0; i < this.products.length; i++) {
       if (this.products[i].productId == productId) {
         this.products.splice(i, 1);
@@ -183,6 +182,6 @@ export class ProductsService {
     // this.products.splice(index, 1);
     // this.productsChanged.next(this.products.slice());
     this.getAllProducts();
-  }
+  } */
 
 }

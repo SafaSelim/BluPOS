@@ -7,6 +7,7 @@ import { ProductsService } from '../products.service';
 
 
 import * as fromApp from '../../../store/app.reducer';
+import * as ProductsActions from '../store/product.actions';
 
 @Component({
   selector: 'app-product-detail',
@@ -56,7 +57,8 @@ export class ProductDetailComponent implements OnInit {
   }
 
   onDelete() {
-    this.productsService.deleteProduct(this.id);
+    // this.productsService.deleteProduct(this.id);
+    this.store.dispatch(new ProductsActions.ProductDeleted(this.id));
     this.router.navigate(['/products']);
   }
 
